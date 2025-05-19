@@ -304,7 +304,7 @@ struct ListSettingsView: View {
 
 
 struct AmplitudeLimitMenuItem: View {
-    @AppStorage("amplitudeLimit") private var amplitudeLimit = 0.2
+    @AppStorage("amplitudeLimit") private var amplitudeLimit = 0.075
     var conductor: TunerConductor? = nil
     
     var body: some View{

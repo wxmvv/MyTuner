@@ -11,7 +11,7 @@ struct AudioKitView<Content: View> : View {
     @AppStorage("smoothingFactor") private var smoothingFactor = 0.5
     @AppStorage("inTuneRange") private var inTuneRange = 2
     @AppStorage("pitchStandard") private var pitchStandard = 440
-    @AppStorage("amplitudeLimit") private var amplitudeLimit = 0.2
+    @AppStorage("amplitudeLimit") private var amplitudeLimit = 0.075
     @AppStorage("preferredName") private var preferredName: ModifierPreference = .preferSharps
     @AppStorage("tuningMode") private var tuningMode: TuningMode = .chromatic
     @AppStorage("instrument") private var instrument: Instrument = .Acoustic

@@ -30,7 +30,7 @@ struct TunerData {
 
 class TunerConductor: ObservableObject, HasAudioEngine {
     @Published var data : TunerData = TunerData()
-    @Published var amplitudeLimit:Float = 0.15
+    @Published var amplitudeLimit:Float = 0.075
     @Published var pitchStandard: Float = 440.0 // { didSet {} }
     @Published var inTuneRange: Int = 2
     @Published var outOfTuneRange: Int = 20
@@ -50,7 +50,7 @@ class TunerConductor: ObservableObject, HasAudioEngine {
     
     /// MARK 平滑算法相关
     // [EMA]
-    @Published var smoothingFactor: Float = 0.7  // [EMA] 调整平滑程度 [0,1] 越大则越平滑，越小则越灵敏
+    @Published var smoothingFactor: Float = 0.5  // [EMA] 调整平滑程度 [0,1] 越大则越平滑，越小则越灵敏
     private var smoothedPitch: Float = 0.0  // [EMA]
     // 取前 n 个样本然后取平均值
     var initialPitches : [Float] = []
@@ -71,7 +71,6 @@ class TunerConductor: ObservableObject, HasAudioEngine {
     // let transitionSampleCount: Int = 5 // 多少个样本后切换到稳定平滑因子
 
 
-    
     init() {
         guard let input = engine.input else { fatalError() }
         guard let device = engine.inputDevice else { fatalError() }
