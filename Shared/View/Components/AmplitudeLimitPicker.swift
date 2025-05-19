@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AmplitudeLimitPicker: View {
-    @AppStorage("amplitudeLimit") private var amplitudeLimit = 0.2
+    @AppStorage("amplitudeLimit") private var amplitudeLimit = 0.075
     @StateObject var conductor: TunerConductor
     
     var body: some View {
