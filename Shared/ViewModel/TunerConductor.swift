@@ -16,6 +16,7 @@ import SwiftUI
 
 struct TunerData {
     var pitch: Float = 0.0
+    var rawPitch: Float = 0.0
     var amplitude: Float = 0.0
     var noteNameWithSharps = "-"
     var noteNameWithFlats = "-"
@@ -47,12 +48,13 @@ class TunerConductor: ObservableObject, HasAudioEngine {
     let silence: Fader
     var tracker: PitchTap!
     
+    /// MARK 平滑算法相关
     // [EMA]
     @Published var smoothingFactor: Float = 0.7  // [EMA] 调整平滑程度 [0,1] 越大则越平滑，越小则越灵敏
     private var smoothedPitch: Float = 0.0  // [EMA]
     // 取前 n 个样本然后取平均值
     var initialPitches : [Float] = []
-    let initialSamplesToAverage = 3
+    let initialSamplesToAverage = 5
     func resetSmoothing() {
         // 当检测到声音停止或长时间静音时，可能需要重置状态
         smoothedPitch = 0.0
@@ -60,14 +62,14 @@ class TunerConductor: ObservableObject, HasAudioEngine {
         print("Smoothing reset.")
     }
     // 取中位数
-    var pitchHistory: [Float] = []
-    let medianWindowSize = 3 // 使用最近3个pitch值的中位数
+     var pitchHistory: [Float] = []
+     let medianWindowSize = 5 // 使用最近3个pitch值的中位数
     // 通过动态调整 smoothFactor 来平滑
-    let initialSmoothingFactor: Float = 0.7 // 初始阶段，更快响应
-    let stableSmoothingFactor: Float = 0.95 // 稳定阶段，更强平滑
-    var sampleCount: Int = 0
-    let transitionSampleCount: Int = 3 // 多少个样本后切换到稳定平滑因子
-    
+    // let initialSmoothingFactor: Float = 0.7 // 初始阶段，更快响应
+    // let stableSmoothingFactor: Float = 0.95 // 稳定阶段，更强平滑
+    // var sampleCount: Int = 0
+    // let transitionSampleCount: Int = 5 // 多少个样本后切换到稳定平滑因子
+
 
     
     init() {
@@ -127,55 +129,56 @@ class TunerConductor: ObservableObject, HasAudioEngine {
     }
     
 
+
+
     func update(_ pitch: AUValue, _ amp: AUValue) {
         guard amp > amplitudeLimit else { return } // Reduces sensitivity to background noise to prevent random / fluctuating data.
         guard pitch > 0 else { return }  // 可以选择在这里重置 smoothedPitch 或维持旧值  // smoothedPitch = 0.0 // 如果希望静音时重置
         
-        
         data.pitch = pitch
+        data.rawPitch = pitch
         data.amplitude = amp
         
-        // [EMA] 平滑 https://zh.wikipedia.org/wiki/移動平均#指數移動平均
+        
         if smoothedPitch == 0.0 {
+            // [Initial] 初始平滑
             if initialPitches.count < initialSamplesToAverage {
                 initialPitches.append(pitch)
                 print("Collecting initial samples: \(initialPitches.count)/\(initialSamplesToAverage)")
-                
                 if initialPitches.count == initialSamplesToAverage {
                     let sum = initialPitches.reduce(0, +) // 计算初始平均值
                     smoothedPitch = sum / Float(initialSamplesToAverage)
-                    print("Initial smoothed pitch set to average: \(smoothedPitch)")
+                } else {
+                    return
                 }
-
+                
             }
         } else {
-            smoothedPitch = smoothingFactor * smoothedPitch + (1.0 - smoothingFactor) * pitch
-        }
-
-        if smoothedPitch == 0.0 {
-            return
+            // 不需要平滑
+            // smoothedPitch = pitch
+            
+            // [EMA] 平滑 https://zh.wikipedia.org/wiki/移動平均#指數移動平均
+            // smoothedPitch = smoothingFactor * smoothedPitch + (1.0 - smoothingFactor) * pitch
+            
+            // 中位数平滑算法
+             pitchHistory.append(pitch)
+             if pitchHistory.count > medianWindowSize {
+                 pitchHistory.removeFirst() // 保持窗口大小
+             }
+             guard pitchHistory.count == medianWindowSize else {
+                 if smoothedPitch == 0.0 { smoothedPitch = pitch }
+                 print("Collecting history for median: \(pitchHistory.count)/\(medianWindowSize)")
+                 return
+             }
+             let sortedPitches = pitchHistory.sorted()
+             smoothedPitch = sortedPitches[medianWindowSize / 2]
         }
         
-        // 计算中位数
-        pitchHistory.append(pitch)
-        if pitchHistory.count > medianWindowSize {
-            pitchHistory.removeFirst() // 保持窗口大小
-        }
-        // 至少需要足够的数据点才能计算中位数
-        guard pitchHistory.count == medianWindowSize else {
-            // 在窗口填满前，可以用原始值或不做处理
-            if smoothedPitch == 0.0 { smoothedPitch = pitch } // 简单处理
-            print("Collecting history for median: \(pitchHistory.count)/\(medianWindowSize)")
-            return
-        }
-        let sortedPitches = pitchHistory.sorted()
-        smoothedPitch = sortedPitches[medianWindowSize / 2] // 对于奇数窗口大小
         
-        
+        // 最终pitch
         data.pitch = smoothedPitch
         
-        
-        // 处理信息
+        // 将pitch处理为midi信息
         let midi = pitchToMidi(smoothedPitch)
         
         if tuningMode == .chromatic {
