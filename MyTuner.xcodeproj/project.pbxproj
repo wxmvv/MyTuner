@@ -13,9 +13,12 @@
 		C42F59F32DA14346000F56D5 /* AudioKitUI in Frameworks */ = {isa = PBXBuildFile; productRef = C42F59EC2DA14346000F56D5 /* AudioKitUI */; };
 		C42F59F42DA14346000F56D5 /* SoundpipeAudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = C42F59EE2DA14346000F56D5 /* SoundpipeAudioKit */; };
 		C42F59F52DA14346000F56D5 /* AudioKitEX in Frameworks */ = {isa = PBXBuildFile; productRef = C42F59EA2DA14346000F56D5 /* AudioKitEX */; };
+		C458CB6A2DDB0F7F002F0121 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = C458CB692DDB0F7F002F0121 /* README.md */; };
+		C458CB6B2DDB0F7F002F0121 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = C458CB692DDB0F7F002F0121 /* README.md */; };
+		C458CB6D2DDB0F8D002F0121 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = C458CB6C2DDB0F8D002F0121 /* LICENSE */; };
+		C458CB6E2DDB0F8D002F0121 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = C458CB6C2DDB0F8D002F0121 /* LICENSE */; };
 		C47B3D432DA616DA00A624EB /* Keyboard in Frameworks */ = {isa = PBXBuildFile; productRef = C47B3D422DA616DA00A624EB /* Keyboard */; };
 		C47B3D472DA616F100A624EB /* Keyboard in Frameworks */ = {isa = PBXBuildFile; productRef = C47B3D462DA616F100A624EB /* Keyboard */; };
-		C48407642DA8DF27009EBF2B /* Sounds in Resources */ = {isa = PBXBuildFile; fileRef = C48407612DA8DF08009EBF2B /* Sounds */; };
 		C48407672DA8DF2F009EBF2B /* Images in Resources */ = {isa = PBXBuildFile; fileRef = C48407602DA8DF05009EBF2B /* Images */; };
 		C4E24A842D914ACB00E260C1 /* AudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = C4E24A832D914ACB00E260C1 /* AudioKit */; };
 		C4E24ACD2D914CD600E260C1 /* AudioKitEX in Frameworks */ = {isa = PBXBuildFile; productRef = C4E24ACC2D914CD600E260C1 /* AudioKitEX */; };
@@ -26,8 +29,9 @@
 /* Begin PBXFileReference section */
 		C40469282DB89BC7004A81D1 /* Sampler */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Sampler; sourceTree = "<group>"; };
 		C42F59FA2DA14346000F56D5 /* MyTuner Dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MyTuner Dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C458CB692DDB0F7F002F0121 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		C458CB6C2DDB0F8D002F0121 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		C48407602DA8DF05009EBF2B /* Images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Images; sourceTree = "<group>"; };
-		C48407612DA8DF08009EBF2B /* Sounds */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Sounds; sourceTree = "<group>"; };
 		C4E24A712D914AAE00E260C1 /* MyTuner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyTuner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -47,36 +51,17 @@
 				Model/Note.swift,
 				Model/ResponseSpeed.swift,
 				Model/TuningMode.swift,
-				View/Components/AmplitudeLimitPicker.swift,
 				View/Components/AudioKitView.swift,
 				View/Components/MatchedNote.swift,
 				View/Components/MinimalTopToolbar.swift,
-				View/Components/NeumorphicButton.swift,
 				View/Components/TuningModePicker.swift,
-				View/InstrumentView/CookbookInstrumentEXSView.swift,
-				View/InstrumentView/CookbookKeyboard.swift,
-				View/InstrumentView/DevInstrumentView.swift,
 				View/InstrumentView/MinimalInstrumentView.swift,
-				View/SettingView/CustomSettingsView.swift,
 				View/SettingView/ListSettingsView.swift,
 				View/SettingView/SettingValues.swift,
 				View/TunerView.swift,
-				View/TunerView/ArcTunerView/ArcTunerView.swift,
 				View/TunerView/ArcTunerView/ref.png,
 				View/TunerView/CircleTunerView/CircleTuner.swift,
 				View/TunerView/CircleTunerView/CircleTunerView.swift,
-				View/TunerView/CookbookTuner/CookbookTunerView.swift,
-				View/TunerView/MinimalTuner/MinimalTunerView.swift,
-				View/TunerView/ProTunerView/CurrentMark.swift,
-				View/TunerView/ProTunerView/MarkDistance.swift,
-				View/TunerView/ProTunerView/ProTunerView.swift,
-				View/TunerView/ProTunerView/TunerOne.swift,
-				View/TunerView/ZenTunerView/Alignment.swift,
-				"View/TunerView/ZenTunerView/Color+MusicalDistance.swift",
-				View/TunerView/ZenTunerView/CurrentNoteMarker.swift,
-				View/TunerView/ZenTunerView/NoteDistanceMarkers.swift,
-				View/TunerView/ZenTunerView/NoteTicks.swift,
-				View/TunerView/ZenTunerView/ZenTunerView.swift,
 				ViewModel/InstrumentConductor.swift,
 				ViewModel/TunerConductor.swift,
 			);
@@ -160,6 +145,20 @@
 			);
 			target = C4E24A702D914AAE00E260C1 /* MyTuner */;
 		};
+		C49455362DDB522900A22CF6 /* Exceptions for "Preview Content" folder in "MyTuner" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Sounds,
+			);
+			target = C4E24A702D914AAE00E260C1 /* MyTuner */;
+		};
+		C49455372DDB522900A22CF6 /* Exceptions for "Preview Content" folder in "MyTuner Dev" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Sounds,
+			);
+			target = C42F59E72DA14346000F56D5 /* MyTuner Dev */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -178,6 +177,18 @@
 				C42F5A712DA15175000F56D5 /* Exceptions for "Shared" folder in "MyTuner Dev" target */,
 			);
 			path = Shared;
+			sourceTree = "<group>";
+		};
+		C49455332DDB522900A22CF6 /* Preview Content */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				C49455362DDB522900A22CF6 /* Exceptions for "Preview Content" folder in "MyTuner" target */,
+				C49455372DDB522900A22CF6 /* Exceptions for "Preview Content" folder in "MyTuner Dev" target */,
+			);
+			explicitFolders = (
+				Sounds,
+			);
+			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		C4E24A732D914AAE00E260C1 /* MyTuner */ = {
@@ -229,14 +240,16 @@
 		C4E24A682D914AAE00E260C1 = {
 			isa = PBXGroup;
 			children = (
-				C48407612DA8DF08009EBF2B /* Sounds */,
 				C48407602DA8DF05009EBF2B /* Images */,
 				C40469282DB89BC7004A81D1 /* Sampler */,
+				C49455332DDB522900A22CF6 /* Preview Content */,
 				C42F5A172DA1513F000F56D5 /* Shared */,
 				C4E24A732D914AAE00E260C1 /* MyTuner */,
 				C42F5A142DA14410000F56D5 /* MyTuner Dev */,
 				C47B3D412DA616DA00A624EB /* Frameworks */,
 				C4E24A722D914AAE00E260C1 /* Products */,
+				C458CB692DDB0F7F002F0121 /* README.md */,
+				C458CB6C2DDB0F8D002F0121 /* LICENSE */,
 			);
 			sourceTree = "<group>";
 		};
@@ -355,8 +368,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				C404692B2DB89C9E004A81D1 /* Sampler in Resources */,
-				C48407642DA8DF27009EBF2B /* Sounds in Resources */,
 				C48407672DA8DF2F009EBF2B /* Images in Resources */,
+				C458CB6D2DDB0F8D002F0121 /* LICENSE in Resources */,
+				C458CB6A2DDB0F7F002F0121 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -365,6 +379,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				C40469292DB89C15004A81D1 /* Sampler in Resources */,
+				C458CB6E2DDB0F8D002F0121 /* LICENSE in Resources */,
+				C458CB6B2DDB0F7F002F0121 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -397,7 +413,7 @@
 				CODE_SIGN_ENTITLEMENTS = Shared/MyTuner.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Shared/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "Preview\\ Content";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "MyTuner Dev/Info.plist";
@@ -433,7 +449,7 @@
 				CODE_SIGN_ENTITLEMENTS = Shared/MyTuner.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Shared/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "Preview\\ Content";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "MyTuner Dev/Info.plist";
@@ -598,7 +614,7 @@
 				CODE_SIGN_ENTITLEMENTS = Shared/MyTuner.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Shared/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "Preview\\ Content";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MyTuner/Info.plist;
@@ -618,7 +634,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = cc.wxmvv.MyTuner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -634,7 +650,7 @@
 				CODE_SIGN_ENTITLEMENTS = Shared/MyTuner.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Shared/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "Preview\\ Content";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MyTuner/Info.plist;
@@ -654,7 +670,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = cc.wxmvv.MyTuner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

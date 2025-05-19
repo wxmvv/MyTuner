@@ -5,6 +5,7 @@
 //  Created by wxm on 4/2/25.
 //
 
+import SwiftUI
 
 enum ModifierPreference: Int, Identifiable, CaseIterable {
     case preferSharps, preferFlats
@@ -18,7 +19,7 @@ enum ModifierPreference: Int, Identifiable, CaseIterable {
         }
     }
     
-    var name: String {
+    var name: LocalizedStringKey {
         switch self {
         case .preferSharps:
             return "Sharps"

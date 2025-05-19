@@ -6,10 +6,11 @@
 //
 
 import Foundation
+import SwiftUI
 
-struct InstrumentDefinition: Identifiable, Hashable {
+struct InstrumentDefinition: Identifiable {
     let id = UUID() // For Identifiable conformance, useful for Picker
-    let displayName: String // Name shown in the UI (e.g., "Classical Guitar")
+    let displayName: LocalizedStringKey // Name shown in the UI (e.g., "Classical Guitar")
     let fileName: String    // File name without extension (e.g., "Classical Acoustic Guitar")
     let fileExtension: String // "exs" or "sf2"
     let subdirectory: String? // Optional subdirectory (e.g., "Sounds/Logic SI/01 Acoustic Guitars")
@@ -21,7 +22,7 @@ struct InstrumentDefinition: Identifiable, Hashable {
     let autoStopDelay: TimeInterval // 自动停止前的延迟时间 (秒)
     
     // Initializer for common cases (like EXS)
-    init(displayName: String, fileName: String, fileExtension: String, subdirectory: String?,needsAutoStop: Bool = false, autoStopDelay: TimeInterval = 1.5) {
+    init(displayName: LocalizedStringKey, fileName: String, fileExtension: String, subdirectory: String?,needsAutoStop: Bool = false, autoStopDelay: TimeInterval = 1.5) {
         self.displayName = displayName
         self.fileName = fileName
         self.fileExtension = fileExtension
@@ -31,7 +32,7 @@ struct InstrumentDefinition: Identifiable, Hashable {
     }
     
     // Initializer specifically for SF2 if needed
-    init(displayName: String, fileName: String, subdirectory: String?, preset: Int, bank: Int = 0,needsAutoStop: Bool = false, autoStopDelay: TimeInterval = 1.5) {
+    init(displayName: LocalizedStringKey, fileName: String, subdirectory: String?, preset: Int, bank: Int = 0,needsAutoStop: Bool = false, autoStopDelay: TimeInterval = 1.5) {
         self.displayName = displayName
         self.fileName = fileName
         self.fileExtension = "sf2" // Assume SF2
@@ -47,7 +48,7 @@ struct InstrumentDefinition: Identifiable, Hashable {
     }
     
     // Convenience computed property for Picker label
-    var label: String {
+    var label: LocalizedStringKey {
         return displayName
     }
 }

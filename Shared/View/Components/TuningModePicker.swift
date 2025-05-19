@@ -49,7 +49,7 @@ struct TuningModePicker: View {
     }
     
     var body_picker: some View {
-        Picker("TuningMode", selection: $tuningMode) {
+        Picker("Tuning Mode", selection: $tuningMode) {
             ForEach(tuningModes, id: \.self) { mode in
                 Text(mode.name)
                     .tag(mode)

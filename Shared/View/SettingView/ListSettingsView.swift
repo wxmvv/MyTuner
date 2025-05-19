@@ -82,7 +82,7 @@ struct ListSettingsView: View {
                         // Tuning Mode
                         Menu {
                             ForEach(tuningModes, id: \.self) { mode in
-                                Button(String(mode.name)) {
+                                Button(mode.name) {
                                     tuningMode = mode
                                     if conductor != nil {
                                         conductor!.tuningMode = mode
@@ -91,10 +91,10 @@ struct ListSettingsView: View {
                             }
                         } label: {
                             HStack {
-                                Text("Amplitude Limit")
+                                Text("Tuning Mode")
                                     .foregroundColor(.primary)
                                 Spacer()
-                                Text(String(tuningMode.name))
+                                Text(tuningMode.name)
                                     .foregroundColor(.primary.opacity(0.7))
                             }
                         }
@@ -177,7 +177,7 @@ struct ListSettingsView: View {
                                 Text("Sound")
                                     .foregroundColor(.primary)
                                 Spacer()
-                                Text(String(availableInstruments[instrumentIndex].displayName) )
+                                Text(availableInstruments[instrumentIndex].displayName) 
                                     .foregroundColor(.primary.opacity(0.7))
                             }
                         }
@@ -186,7 +186,7 @@ struct ListSettingsView: View {
                             Text("velocity: \(velocityVal,specifier:"%.0f")")
                             Spacer()
                             Slider(value: $velocityVal,in: velocityRange ,step:10){
-                                Text("velocity:\(velocityVal,specifier:"%.0f")")
+                                Text("velocity: \(velocityVal,specifier:"%.0f")")
                             } onEditingChanged: { isEdited in
                                 velocity = Int(velocityVal)
                                 instrumentConductor?.velocity = MIDIVelocity(velocityVal)
@@ -250,8 +250,7 @@ struct ListSettingsView: View {
                         
                         // Leave a Review
                         Button(action: {
-//                            TODO
-                            if let url = URL(string: "https://apps.apple.com/app/id0000000000") {
+                            if let url = URL(string: "https://apps.apple.com/app/id6746087511") {
                                 openURL(url)
                             }
                         }) {
@@ -271,7 +270,7 @@ struct ListSettingsView: View {
                 .listRowSeparatorTint(Color.primary.opacity(0.2)) // 分割线
                 .listRowBackground(Color.primary.opacity(0.1)) // row背景
                 // copy right
-                Text("© 2025 wxmvv.cc. All rights reserved.")
+                Text("© 2025 wxmvv.cc")
                     .listRowBackground(Color.white.opacity(0))
                     .font(.footnote)
                     .foregroundColor(.secondary)
@@ -329,31 +328,6 @@ struct AmplitudeLimitMenuItem: View {
     }
 }
 
-struct SmoothingFactorMenuItem: View {
-    @AppStorage("smoothingFactor") private var smoothingFactor = 0.2
-    var conductor: TunerConductor? = nil
-    
-    var body: some View{
-        Menu {
-            ForEach(smoothingFactorValues, id: \.self) { val in
-                Button(String(val)) {
-                    smoothingFactor = val
-                    if conductor != nil {
-                        conductor!.amplitudeLimit = Float(val)
-                    }
-                }
-            }
-        } label: {
-            HStack {
-                Text("Amplitude Limit")
-                    .foregroundColor(.primary)
-                Spacer()
-                Text(String(smoothingFactor))
-                    .foregroundColor(.primary.opacity(0.7))
-            }
-        }
-    }
-}
 
 struct ResponseSpeedMenuItem: View {
     @AppStorage("responseSpeed") private var responseSpeed:ResponseSpeed = .medium
@@ -406,7 +380,7 @@ struct ModifierPreferenceMenuItem: View {
     var body: some View {
         Menu {
             ForEach(ModifierPreference.allCases, id: \.self) { val in
-                Button(String(val.name)) {
+                Button(val.name) {
                     preferredName = val
                 }
             }
@@ -415,7 +389,7 @@ struct ModifierPreferenceMenuItem: View {
                 Text("Preferred Name")
                     .foregroundColor(.primary)
                 Spacer()
-                Text(String(preferredName.name) )
+                Text(preferredName.name)
                     .foregroundColor(.primary.opacity(0.7))
             }
         }

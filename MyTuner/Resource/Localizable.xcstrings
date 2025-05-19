@@ -2,32 +2,66 @@
   "sourceLanguage" : "en",
   "strings" : {
     "%@" : {
-
-    },
-    "%@ / %@" : {
       "localizations" : {
-        "en" : {
+        "zh-Hans" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$@ / %2$@"
+            "state" : "translated",
+            "value" : "%@"
           }
         }
       }
     },
     "%0.1f" : {
-
+      "extractionState" : "stale",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%0.1f"
+          }
+        }
+      }
     },
     "%0.2f" : {
-
+      "extractionState" : "stale",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%0.2f"
+          }
+        }
+      }
     },
     "%lld" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld"
+          }
+        }
+      }
     },
-    "%lldHz" : {
-
+    "© 2025 wxmvv.cc" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "© 2025 wxmvv.cc"
+          }
+        }
+      }
     },
-    "© 2025 wxmvv.cc. All rights reserved." : {
-
+    "12 String Guitar" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "12 弦吉他"
+          }
+        }
+      }
     },
     "About" : {
       "localizations" : {
@@ -49,12 +83,12 @@
         }
       }
     },
-    "Amplitude" : {
+    "Acoustic Guitars" : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "幅度"
+            "value" : "原声吉他"
           }
         }
       }
@@ -65,26 +99,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "幅度限制"
-          }
-        }
-      }
-    },
-    "Amplitude Limit %@" : {
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "幅度限制 %@"
-          }
-        }
-      }
-    },
-    "Amplitude: %0.2f" : {
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "幅度: %0.2f"
           }
         }
       }
@@ -109,13 +123,40 @@
         }
       }
     },
-    "cents: %0.2f" : {
-
+    "Chorus Guitar" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "合唱吉他"
+          }
+        }
+      }
     },
-    "cents: %f" : {
-
+    "chromatic" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "半音阶"
+          }
+        }
+      }
+    },
+    "Chromatic" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "半音阶"
+          }
+        }
+      }
     },
     "Close" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -135,42 +176,22 @@
         }
       }
     },
-    "Default Tuner View" : {
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "默认 Tuner View"
-          }
-        }
-      }
-    },
-    "Dev Tuner View" : {
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "开发者 Tuner View"
-          }
-        }
-      }
-    },
-    "Distance (Hz)" : {
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "距离 (Hz)"
-          }
-        }
-      }
-    },
     "Done" : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "完成"
+          }
+        }
+      }
+    },
+    "Dry Guitar" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "干燥吉他"
           }
         }
       }
@@ -185,20 +206,35 @@
         }
       }
     },
-    "Enter Hz" : {
-
+    "Fast" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "稍快"
+          }
+        }
+      }
     },
-    "Float: %0.2f" : {
-
+    "Flats" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "♭"
+          }
+        }
+      }
     },
-    "Frequency" : {
-
-    },
-    "frequencyDistance Float: %0.2f" : {
-
-    },
-    "frequencyDistance Int: %0.0f" : {
-
+    "Guitar" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "吉他"
+          }
+        }
+      }
     },
     "In-tune Range" : {
       "localizations" : {
@@ -210,10 +246,8 @@
         }
       }
     },
-    "Input: %@" : {
-
-    },
     "instrument" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -233,9 +267,6 @@
         }
       }
     },
-    "Int: %0.0f" : {
-
-    },
     "Leave a Review" : {
       "localizations" : {
         "zh-Hans" : {
@@ -247,7 +278,14 @@
       }
     },
     "Microphone permission Denied，Please grant permissions in the settings interface." : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "麦克风权限被拒绝，请在设置界面授予权限。"
+          }
+        }
+      }
     },
     "Microphone permission granted~ 🎉" : {
       "localizations" : {
@@ -259,18 +297,22 @@
         }
       }
     },
-    "Mode" : {
-
-    },
-    "Note Name" : {
-
-    },
-    "Note Name: %@ / %@" : {
+    "Normal" : {
       "localizations" : {
-        "en" : {
+        "zh-Hans" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Note Name: %1$@ / %2$@"
+            "state" : "translated",
+            "value" : "默认"
+          }
+        }
+      }
+    },
+    "Octave Pad" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "八音盒"
           }
         }
       }
@@ -285,6 +327,26 @@
         }
       }
     },
+    "Piano" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "钢琴"
+          }
+        }
+      }
+    },
+    "Piano_Z-Doc Soundfont II" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Piano_Z-Doc Soundfont II"
+          }
+        }
+      }
+    },
     "Pitch Standard" : {
       "localizations" : {
         "zh-Hans" : {
@@ -295,35 +357,12 @@
         }
       }
     },
-    "Pitch: %0.2f" : {
-
-    },
     "Preferred Name" : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "# 或 b"
-          }
-        }
-      }
-    },
-    "Reference A4 (Hz)" : {
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "参考 A4 (Hz)"
-          }
-        }
-      }
-    },
-    "Reference AmpLimit (Mic Sensitivity)" : {
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "参考麦克风灵敏度 (AmpLimit)"
+            "value" : "# 或 ♭"
           }
         }
       }
@@ -368,6 +407,36 @@
         }
       }
     },
+    "Sharps" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "#"
+          }
+        }
+      }
+    },
+    "Slow" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "稍慢"
+          }
+        }
+      }
+    },
+    "Soft Guitar" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "软吉他"
+          }
+        }
+      }
+    },
     "Sound" : {
       "localizations" : {
         "zh-Hans" : {
@@ -377,15 +446,6 @@
           }
         }
       }
-    },
-    "targetFrequency: %0.2f" : {
-
-    },
-    "targetMidi noteName %@" : {
-
-    },
-    "targetMidi: %lld" : {
-
     },
     "Tone" : {
       "localizations" : {
@@ -417,16 +477,6 @@
         }
       }
     },
-    "TuningMode" : {
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "调音模式"
-          }
-        }
-      }
-    },
     "Ukulele" : {
       "localizations" : {
         "zh-Hans" : {
@@ -438,6 +488,7 @@
       }
     },
     "velocity" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -457,22 +508,42 @@
         }
       }
     },
-    "velocity:%.0f" : {
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "速度:%.0f"
-          }
-        }
-      }
-    },
     "Version" : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "版本"
+          }
+        }
+      }
+    },
+    "Warm Chorus" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "温暖合唱"
+          }
+        }
+      }
+    },
+    "Warm Guitar" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "温暖吉他"
+          }
+        }
+      }
+    },
+    "Wet Guitar" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "潮湿吉他"
           }
         }
       }

@@ -143,17 +143,6 @@
     "frequencyDistance Int: %0.0f" : {
 
     },
-    "Helle world!" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "你好 世界！"
-          }
-        }
-      }
-    },
     "In-tune Range" : {
 
     },
@@ -249,17 +238,6 @@
     "Settings" : {
 
     },
-    "Settings View" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "设置 View"
-          }
-        }
-      }
-    },
     "Settings Views" : {
 
     },
@@ -304,9 +282,6 @@
 
     },
     "velocity: %.0f" : {
-
-    },
-    "velocity:%.0f" : {
 
     },
     "Version" : {

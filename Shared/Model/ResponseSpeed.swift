@@ -6,14 +6,15 @@
 //
 
 import AudioKit
+import SwiftUI
 
 
 enum ResponseSpeed:String {
 //    case shortest
 //    case veryShort
-    case short
-    case medium
-    case long
+    case short="short"
+    case medium="medium"
+    case long="long"
 //    case veryLong
 //    case huge
 //    case longest
@@ -24,7 +25,7 @@ enum ResponseSpeed:String {
     /// 如果 bufferLength 太小（如 32 或 64），在低端设备上可能导致音频处理跟不上，出现爆音或崩溃 则只从short开始可以设置
 
     
-    var name: String {
+    var name: LocalizedStringKey {
         switch self {
 //        case .shortest:
 //            return "Fastest"

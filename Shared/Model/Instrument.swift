@@ -6,15 +6,16 @@
 //
 
 import Foundation
+import SwiftUI
 
 
 enum Instrument: String,CaseIterable {
-    case Acoustic
-    case Electric
-    case Bass
-    case Ukulele
+    case Acoustic="Acoustic"
+    case Electric="Electric"
+    case Bass="Bass"
+    case Ukulele="Ukulele"
     
-    var name: String {
+    var name: LocalizedStringKey {
         switch self {
             case .Acoustic:
                 return "Acoustic"

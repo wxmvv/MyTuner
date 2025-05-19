@@ -302,7 +302,7 @@ struct CustomSettingsView: View {
                         Text("velocity: \(velocityVal,specifier:"%.0f")")
                         Spacer()
                         Slider(value: $velocityVal,in: velocityRange ,step:10){
-                            Text("velocity:\(velocityVal,specifier:"%.0f")")
+                            Text("velocity: \(velocityVal,specifier:"%.0f")")
                         } onEditingChanged: { isEdited in
                             velocity = Int(velocityVal)
                             instrumentConductor?.velocity = MIDIVelocity(velocityVal)
@@ -369,7 +369,7 @@ struct CustomSettingsView: View {
                     }
                     
                     Button(action: {
-                        if let url = URL(string: "https://apps.apple.com/app/id0000000000") {
+                        if let url = URL(string: "https://apps.apple.com/app/id6746087511") {
                             openURL(url)
                         }
                     }) {

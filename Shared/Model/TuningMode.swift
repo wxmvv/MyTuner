@@ -5,12 +5,13 @@
 //  Created by wxm on 4/6/25.
 //
 
+import SwiftUI
 
 enum TuningMode:String,CaseIterable {
-    case chromatic
-    case instrument
+    case chromatic = "Chromatic"
+    case instrument = "Instrument"
     
-    var name: String {
+    var name: LocalizedStringKey {
         switch self {
             case .chromatic:
                 return "Chromatic"
@@ -19,4 +20,5 @@ enum TuningMode:String,CaseIterable {
 
         }
     }
+    
 }

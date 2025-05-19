@@ -26,7 +26,7 @@ let responseSpeedValues : [ResponseSpeed] = [
     // .longest
 ]
 
-let tuningModes = TuningMode.allCases
+let tuningModes: [TuningMode] = [.chromatic,.instrument]
 
 let instruments: [Instrument] = [
     .Acoustic,
