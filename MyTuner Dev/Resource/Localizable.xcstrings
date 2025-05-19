@@ -1,0 +1,320 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "%.0f" : {
+
+    },
+    "%@" : {
+
+    },
+    "%@ / %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ / %2$@"
+          }
+        }
+      }
+    },
+    "%0.1f" : {
+
+    },
+    "%0.2f" : {
+
+    },
+    "%lld" : {
+
+    },
+    "%lldHz" : {
+
+    },
+    "© 2025 wxmvv.cc. All rights reserved." : {
+
+    },
+    "+%lld" : {
+
+    },
+    "About" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "关于"
+          }
+        }
+      }
+    },
+    "Acoustic" : {
+
+    },
+    "Amplitude" : {
+
+    },
+    "Amplitude Limit" : {
+
+    },
+    "Amplitude Limit %@" : {
+
+    },
+    "Amplitude: %0.2f" : {
+
+    },
+    "App Icon" : {
+
+    },
+    "Bass" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "贝斯"
+          }
+        }
+      }
+    },
+    "cents: %0.2f" : {
+
+    },
+    "cents: %f" : {
+
+    },
+    "Circle Tuner" : {
+
+    },
+    "Circle Tuner in TunerView" : {
+
+    },
+    "Close" : {
+
+    },
+    "Contact" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "联系我"
+          }
+        }
+      }
+    },
+    "Cookbook Instrument EXS View" : {
+
+    },
+    "Cookbook Tuner View" : {
+
+    },
+    "Custom Settings" : {
+
+    },
+    "Default Tuner View" : {
+
+    },
+    "Dev Instrument" : {
+
+    },
+    "Dev Tuner View" : {
+
+    },
+    "Dev Tuner Views" : {
+
+    },
+    "Distance (Hz)" : {
+
+    },
+    "Done" : {
+
+    },
+    "Electric" : {
+
+    },
+    "Enter Hz" : {
+
+    },
+    "Float: %0.2f" : {
+
+    },
+    "Frequency" : {
+
+    },
+    "frequencyDistance Float: %0.2f" : {
+
+    },
+    "frequencyDistance Int: %0.0f" : {
+
+    },
+    "Helle world!" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "你好 世界！"
+          }
+        }
+      }
+    },
+    "In-tune Range" : {
+
+    },
+    "Input: %@" : {
+
+    },
+    "instrument" : {
+
+    },
+    "Instrument" : {
+
+    },
+    "Instrument Views" : {
+
+    },
+    "Int: %0.0f" : {
+
+    },
+    "Leave a Review" : {
+
+    },
+    "List Settings" : {
+
+    },
+    "Microphone permission Denied，Please grant permissions in the settings interface." : {
+
+    },
+    "Microphone permission granted.~ 🎉" : {
+
+    },
+    "Microphone permission granted~ 🎉" : {
+
+    },
+    "Minimal Tuner View" : {
+
+    },
+    "Mode" : {
+
+    },
+    "My Tuner" : {
+
+    },
+    "Note Name" : {
+
+    },
+    "Note Name: %@ / %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Note Name: %1$@ / %2$@"
+          }
+        }
+      }
+    },
+    "Permissions" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "权限"
+          }
+        }
+      }
+    },
+    "Pitch Standard" : {
+
+    },
+    "Pitch: %0.2f" : {
+
+    },
+    "Preferred Name" : {
+
+    },
+    "Pro Tuner View" : {
+
+    },
+    "Reference A4 (Hz)" : {
+
+    },
+    "Reference AmpLimit (Mic Sensitivity)" : {
+
+    },
+    "Request microphone permission.." : {
+
+    },
+    "Reset to A:440Hz" : {
+
+    },
+    "Response Speed" : {
+
+    },
+    "Settings" : {
+
+    },
+    "Settings View" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "设置 View"
+          }
+        }
+      }
+    },
+    "Settings Views" : {
+
+    },
+    "Sound" : {
+
+    },
+    "targetFrequency: %0.2f" : {
+
+    },
+    "targetMidi noteName %@" : {
+
+    },
+    "targetMidi: %lld" : {
+
+    },
+    "Tone" : {
+
+    },
+    "Tuner" : {
+
+    },
+    "Tuner Views" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "调音器 View"
+          }
+        }
+      }
+    },
+    "Tuning Mode" : {
+
+    },
+    "TuningMode" : {
+
+    },
+    "Ukulele" : {
+
+    },
+    "velocity" : {
+
+    },
+    "velocity: %.0f" : {
+
+    },
+    "velocity:%.0f" : {
+
+    },
+    "Version" : {
+
+    },
+    "Zen Tuner View" : {
+
+    }
+  },
+  "version" : "1.0"
+}

@@ -1,0 +1,482 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "%@" : {
+
+    },
+    "%@ / %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ / %2$@"
+          }
+        }
+      }
+    },
+    "%0.1f" : {
+
+    },
+    "%0.2f" : {
+
+    },
+    "%lld" : {
+
+    },
+    "%lldHz" : {
+
+    },
+    "© 2025 wxmvv.cc. All rights reserved." : {
+
+    },
+    "About" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "关于"
+          }
+        }
+      }
+    },
+    "Acoustic" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "原声吉他"
+          }
+        }
+      }
+    },
+    "Amplitude" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "幅度"
+          }
+        }
+      }
+    },
+    "Amplitude Limit" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "幅度限制"
+          }
+        }
+      }
+    },
+    "Amplitude Limit %@" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "幅度限制 %@"
+          }
+        }
+      }
+    },
+    "Amplitude: %0.2f" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "幅度: %0.2f"
+          }
+        }
+      }
+    },
+    "App Icon" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "App 图标"
+          }
+        }
+      }
+    },
+    "Bass" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "贝斯"
+          }
+        }
+      }
+    },
+    "cents: %0.2f" : {
+
+    },
+    "cents: %f" : {
+
+    },
+    "Close" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "关闭"
+          }
+        }
+      }
+    },
+    "Contact" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "联系我"
+          }
+        }
+      }
+    },
+    "Default Tuner View" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "默认 Tuner View"
+          }
+        }
+      }
+    },
+    "Dev Tuner View" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "开发者 Tuner View"
+          }
+        }
+      }
+    },
+    "Distance (Hz)" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "距离 (Hz)"
+          }
+        }
+      }
+    },
+    "Done" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "完成"
+          }
+        }
+      }
+    },
+    "Electric" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "电吉他"
+          }
+        }
+      }
+    },
+    "Enter Hz" : {
+
+    },
+    "Float: %0.2f" : {
+
+    },
+    "Frequency" : {
+
+    },
+    "frequencyDistance Float: %0.2f" : {
+
+    },
+    "frequencyDistance Int: %0.0f" : {
+
+    },
+    "In-tune Range" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "调音准确范围"
+          }
+        }
+      }
+    },
+    "Input: %@" : {
+
+    },
+    "instrument" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "乐器"
+          }
+        }
+      }
+    },
+    "Instrument" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "乐器"
+          }
+        }
+      }
+    },
+    "Int: %0.0f" : {
+
+    },
+    "Leave a Review" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "留下评论"
+          }
+        }
+      }
+    },
+    "Microphone permission Denied，Please grant permissions in the settings interface." : {
+
+    },
+    "Microphone permission granted~ 🎉" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "已获取麦克风权限~ 🎉"
+          }
+        }
+      }
+    },
+    "Mode" : {
+
+    },
+    "Note Name" : {
+
+    },
+    "Note Name: %@ / %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Note Name: %1$@ / %2$@"
+          }
+        }
+      }
+    },
+    "Permissions" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "权限"
+          }
+        }
+      }
+    },
+    "Pitch Standard" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "标准音高"
+          }
+        }
+      }
+    },
+    "Pitch: %0.2f" : {
+
+    },
+    "Preferred Name" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "# 或 b"
+          }
+        }
+      }
+    },
+    "Reference A4 (Hz)" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "参考 A4 (Hz)"
+          }
+        }
+      }
+    },
+    "Reference AmpLimit (Mic Sensitivity)" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "参考麦克风灵敏度 (AmpLimit)"
+          }
+        }
+      }
+    },
+    "Request microphone permission.." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "请求麦克权限"
+          }
+        }
+      }
+    },
+    "Reset to A:440Hz" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "重制为 A:440Hz"
+          }
+        }
+      }
+    },
+    "Response Speed" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "响应速度"
+          }
+        }
+      }
+    },
+    "Settings" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "设置"
+          }
+        }
+      }
+    },
+    "Sound" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "音色"
+          }
+        }
+      }
+    },
+    "targetFrequency: %0.2f" : {
+
+    },
+    "targetMidi noteName %@" : {
+
+    },
+    "targetMidi: %lld" : {
+
+    },
+    "Tone" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "声音"
+          }
+        }
+      }
+    },
+    "Tuner" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "调音器"
+          }
+        }
+      }
+    },
+    "Tuning Mode" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "调音模式"
+          }
+        }
+      }
+    },
+    "TuningMode" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "调音模式"
+          }
+        }
+      }
+    },
+    "Ukulele" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "尤克里里"
+          }
+        }
+      }
+    },
+    "velocity" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "速度"
+          }
+        }
+      }
+    },
+    "velocity: %.0f" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "速度: %.0f"
+          }
+        }
+      }
+    },
+    "velocity:%.0f" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "速度:%.0f"
+          }
+        }
+      }
+    },
+    "Version" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "版本"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}
