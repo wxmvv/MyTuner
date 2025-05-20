@@ -26,6 +26,19 @@
 		C4E24AD32D914D1100E260C1 /* SoundpipeAudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = C4E24AD22D914D1100E260C1 /* SoundpipeAudioKit */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		C4868DAB2DDBFAEF007902DC /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		C40469282DB89BC7004A81D1 /* Sampler */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Sampler; sourceTree = "<group>"; };
 		C42F59FA2DA14346000F56D5 /* MyTuner Dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MyTuner Dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -299,6 +312,7 @@
 				C4E24A6D2D914AAE00E260C1 /* Sources */,
 				C4E24A6E2D914AAE00E260C1 /* Frameworks */,
 				C4E24A6F2D914AAE00E260C1 /* Resources */,
+				C4868DAB2DDBFAEF007902DC /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
@@ -326,7 +340,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1620;
+				LastSwiftUpdateCheck = 1630;
 				LastUpgradeCheck = 1630;
 				TargetAttributes = {
 					C4E24A702D914AAE00E260C1 = {
@@ -634,7 +648,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = cc.wxmvv.MyTuner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -670,7 +684,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = cc.wxmvv.MyTuner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
