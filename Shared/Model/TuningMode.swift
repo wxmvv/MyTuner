@@ -20,5 +20,12 @@ enum TuningMode:String,CaseIterable {
 
         }
     }
+
+    var symbolName: String {
+        switch self {
+            case .chromatic: return "pianokeys"
+            case .instrument: return "music.note"
+        }
+    }
     
 }

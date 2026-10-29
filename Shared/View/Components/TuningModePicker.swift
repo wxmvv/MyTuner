@@ -11,6 +11,7 @@ struct TuningModePicker: View {
     @AppStorage("tuningMode") private var tuningMode = TuningMode.chromatic
     @AppStorage("instrument") private var instrument:Instrument = .Acoustic
     @StateObject var conductor: TunerConductor
+    var toolbarLabel = false
     //    var onModeChanged: ((TuningMode) -> Void)?  //回调
     
     var body: some View {
@@ -19,31 +20,41 @@ struct TuningModePicker: View {
     
     var body_menu: some View{
         Menu {
-            Button(TuningMode.chromatic.name, action: {
+            Button(action: {
                 withAnimation(.easeInOut(duration: 0.3)) {
                     tuningMode = .chromatic
                     conductor.tuningMode = .chromatic
                 }
-            })
+            }) {
+                Label(TuningMode.chromatic.name, systemImage: TuningMode.chromatic.symbolName)
+            }
             Divider()
             ForEach(instruments, id: \.self) { ins in
-                Button(ins.name, action: {
+                Button(action: {
                     withAnimation(.easeInOut(duration: 0.3)) {
                         tuningMode = .instrument
                         conductor.tuningMode = .instrument
                         instrument = ins
                         conductor.instrument = ins
                     }
-                })
+                }) {
+                    Label(ins.name, systemImage: ins.symbolName)
+                }
             }
         } label: {
-            HStack {
-                if tuningMode == .instrument {
-                    Text(instrument.name)
-                } else {
-                    Text(tuningMode.name)
+            if toolbarLabel {
+                Label(tuningMode == .instrument ? instrument.name : tuningMode.name,
+                      systemImage: tuningMode == .instrument ? instrument.symbolName : tuningMode.symbolName)
+            } else {
+                HStack {
+                    Image(systemName: tuningMode == .instrument ? instrument.symbolName : tuningMode.symbolName)
+                    if tuningMode == .instrument {
+                        Text(instrument.name)
+                    } else {
+                        Text(tuningMode.name)
+                    }
+                    Image(systemName: "chevron.down")
                 }
-                Image(systemName: "chevron.down")
             }
         }
     }

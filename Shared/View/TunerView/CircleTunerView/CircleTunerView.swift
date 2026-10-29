@@ -27,6 +27,7 @@ struct CircleTunerView: View {
     @State private var showSettingsSheet = false
     
     var body: some View {
+        NavigationStack {
         AudioKitView(conductor: conductor) {
             ZStack {
                 Color.white.opacity(0)
@@ -34,8 +35,6 @@ struct CircleTunerView: View {
                 CircleTuner(tunerData: conductor.data)
                 
                 VStack(spacing: 0) {
-                    // Top toolbar
-                    MinimalTopToolbar(conductor: conductor, showSettingsSheet: $showSettingsSheet)
                     Spacer()
                     // Instrument
                     MinimalInstrumentView(instrumentConductor: instrumentConductor, conductor: conductor)
@@ -59,6 +58,20 @@ struct CircleTunerView: View {
         .sheet(isPresented: $showSettingsSheet) {
             ListSettingsViewSheet(conductor: conductor,instrumentConductor: instrumentConductor, showSettingsSheet: $showSettingsSheet)
                 .presentationBackground(Material.regular)
+        }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                TuningModePicker(conductor: conductor, toolbarLabel: true)
+            }
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                    showSettingsSheet = true
+                } label: {
+                    Label("Settings", systemImage: "gearshape")
+                }
+            }
+        }
+        .tint(.primary)
         }
         
     }

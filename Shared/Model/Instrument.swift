@@ -27,6 +27,15 @@ enum Instrument: String,CaseIterable {
                 return "Ukulele"
         }
     }
+
+    var symbolName: String {
+        switch self {
+            case .Acoustic: return "guitars"
+            case .Electric: return "bolt"
+            case .Bass: return "waveform"
+            case .Ukulele: return "music.note"
+        }
+    }
     
     var numberOfNotes: Int {
         switch self {
