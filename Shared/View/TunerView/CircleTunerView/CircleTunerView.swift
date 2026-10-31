@@ -223,6 +223,8 @@ private struct MetronomeView: View {
                     .font(.headline).frame(minWidth: 150).padding()
                 }
                 .buttonStyle(.borderedProminent)
+                .tint(.mint)
+                .foregroundStyle(.black)
                 if let error = metronome.errorMessage {
                     Text(error).foregroundStyle(.red)
                 }
