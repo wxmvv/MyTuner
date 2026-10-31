@@ -25,28 +25,11 @@ struct MinimalInstrumentView: View {
                         print("note.frequency \(note.frequency)")
                         instrumentConductor.playNote(note:MIDINoteNumber(note.midi))
                     } label :{
-                        VStack(spacing: 5) {
-                            ZStack {
-                                Circle()
-                                // .fill(conductor.data.targetMidi == note.midi ? conductor.isInTune ? .green : conductor.isOutOfTune ? .red : .yellow : Color.gray.opacity(0.3))
-                                // TODO 动态效果
-                                    .fill(
-                                        dev ? Color(uiColor: .systemGray2) :
-                                            conductor.data.targetMidi == note.midi ? Color(uiColor:.systemGray2) : Color(uiColor: .systemGray5))
-                                    .frame(width: 50, height: 50)
-                                Text(note.noteNameString)
-                                    .foregroundColor(.primary)
-                                    .font(.title2)
-                                    .fontWeight(.bold)
-                            }
-                        }
-                        .padding(.horizontal,6)
-                        .padding(.vertical)
-                        .shadow(
-                            color: Color(uiColor:.systemGray).opacity(0.2),
-                            radius: 6, x: 6, y: 6
-                        )
+                        noteButtonLabel(note.noteNameString, isSelected: dev || conductor.data.targetMidi == note.midi)
+                            .padding(.horizontal, 6)
+                            .padding(.vertical)
                     }
+                    .buttonStyle(.plain)
                 }
                 
             }
@@ -56,6 +39,31 @@ struct MinimalInstrumentView: View {
         .frame(height: 80)
 //        .background(.red)
     }
+    @ViewBuilder
+    private func noteButtonLabel(_ title: String, isSelected: Bool) -> some View {
+        let label = Text(title)
+            .foregroundColor(.primary)
+            .font(.title2.weight(.bold))
+            .frame(width: 50, height: 50)
+            .contentShape(Circle())
+
+        if #available(iOS 26.0, *) {
+            label.glassEffect(
+                isSelected ? .regular.tint(.gray.opacity(0.45)).interactive() : .regular.interactive(),
+                in: Circle()
+            )
+        } else {
+            label
+                .background(.regularMaterial, in: Circle())
+                .overlay {
+                    Circle().fill(Color.primary.opacity(isSelected ? 0.18 : 0.04))
+                }
+                .overlay {
+                    Circle().strokeBorder(Color.primary.opacity(isSelected ? 0.24 : 0.1), lineWidth: 1)
+                }
+        }
+    }
+
 }
 
 @available(iOS 17, *)

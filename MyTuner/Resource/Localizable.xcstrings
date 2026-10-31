@@ -11,34 +11,22 @@
         }
       }
     },
-    "%0.1f" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%0.1f"
-          }
-        }
-      }
-    },
-    "%0.2f" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%0.2f"
-          }
-        }
-      }
-    },
     "%lld" : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "%lld"
+          }
+        }
+      }
+    },
+    "%lld / %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld / %2$lld"
           }
         }
       }
@@ -123,6 +111,26 @@
         }
       }
     },
+    "Beats per measure" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "每小节拍数"
+          }
+        }
+      }
+    },
+    "BPM" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "BPM"
+          }
+        }
+      }
+    },
     "Chorus Guitar" : {
       "localizations" : {
         "zh-Hans" : {
@@ -171,6 +179,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "联系我"
+          }
+        }
+      }
+    },
+    "Current beat" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "当前拍"
+          }
+        }
+      }
+    },
+    "Decrease tempo" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "降低速度"
           }
         }
       }
@@ -245,13 +273,12 @@
         }
       }
     },
-    "instrument" : {
-      "extractionState" : "stale",
+    "Increase tempo" : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "乐器"
+            "value" : "提高速度"
           }
         }
       }
@@ -272,6 +299,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "留下评论"
+          }
+        }
+      }
+    },
+    "Metronome" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "节拍器"
           }
         }
       }
@@ -446,6 +483,36 @@
         }
       }
     },
+    "Start" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "开始"
+          }
+        }
+      }
+    },
+    "Stop" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "停止"
+          }
+        }
+      }
+    },
+    "Tempo" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "速度"
+          }
+        }
+      }
+    },
     "Tone" : {
       "localizations" : {
         "zh-Hans" : {
@@ -486,13 +553,12 @@
         }
       }
     },
-    "velocity" : {
-      "extractionState" : "stale",
+    "Unable to start the metronome." : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "速度"
+            "value" : "无法启动节拍器。"
           }
         }
       }

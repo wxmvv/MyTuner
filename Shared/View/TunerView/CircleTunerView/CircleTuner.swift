@@ -40,12 +40,11 @@ struct CircleTuner: View {
                     .animation(.easeInOut, value: getOffsetX())
                 MatchedNote(note: tunerData.targetNote)
                     .frame(width: 180,height: 180)
-                    .animation(.none,value: tunerData.cents)
+                    .transaction { $0.animation = nil }
             }
             .frame(width: geo.size.width, height: geo.size.height)
             .shadow(color: getOffsetX()==0 ? getColor(cents:tunerData.cents).opacity(1): Color.clear, radius: getOffsetX()==0 ? 100 : 0, x: 0, y: 0)
             .shadow(color: getOffsetX()==0 ? getColor(cents:tunerData.cents).opacity(1): Color.clear, radius: getOffsetX()==0 ? 160 : 0, x: 0, y: 0)
-            .animation(.easeInOut, value: tunerData.cents)
         }
     }
     private func getOffsetX()->Float{
