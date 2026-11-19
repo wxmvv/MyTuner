@@ -208,27 +208,20 @@ struct MetronomeView: View {
 
     private var tempoControl: some View {
         VStack(spacing: 4) {
-            Text("BPM")
-                .font(.caption.weight(.semibold)).tracking(2)
-                .foregroundStyle(.secondary)
+            HStack(spacing: 4) {
+                Text("BPM").tracking(2)
+                Image(systemName: "arrow.up.arrow.down").imageScale(.small)
+            }
+            .font(.caption.weight(.semibold))
+            .foregroundStyle(.secondary)
+            .accessibilityHidden(true)
             HStack {
                 tempoButton(-1)
-                Spacer(minLength: 4)
-                Text(verbatim: String(metronome.settings.tempo))
-                    .font(.system(size: 88, weight: .light, design: .rounded))
-                    .monospacedDigit().lineLimit(1).minimumScaleFactor(0.5)
-                    .accessibilityLabel("Tempo")
-                    .accessibilityValue("\(metronome.settings.tempo) BPM")
-                Spacer(minLength: 4)
+                TempoReadout(tempo: $metronome.settings.tempo, ink: ink)
                 tempoButton(1)
             }
             Text(verbatim: metronome.settings.tempoTerm)
                 .font(.system(.title3, design: .serif).italic()).foregroundStyle(ink)
-            Slider(value: Binding(get: { Double(metronome.settings.tempo) },
-                                  set: { metronome.settings.tempo = Int($0.rounded()) }),
-                   in: Double(MetronomeSettings.tempoRange.lowerBound)...Double(MetronomeSettings.tempoRange.upperBound), step: 1)
-                .tint(ink).padding(.top, 8)
-                .accessibilityLabel("Tempo")
         }
         .padding(.horizontal, 8)
     }
@@ -336,6 +329,71 @@ struct MetronomeView: View {
             UIApplication.shared.isIdleTimerDisabled = originalIdleSetting
             self.originalIdleSetting = nil
         }
+    }
+}
+
+private struct TempoReadout: View {
+    @Binding var tempo: Int
+    let ink: Color
+    @GestureState private var dragging = false
+    @State private var lastDragStep = 0
+    @State private var editing = false
+    @State private var entry = ""
+
+    private let range = MetronomeSettings.tempoRange
+
+    var body: some View {
+        Text(verbatim: String(tempo))
+            .font(.system(size: 88, weight: .light, design: .rounded))
+            .monospacedDigit().lineLimit(1).minimumScaleFactor(0.5)
+            .frame(maxWidth: .infinity)
+            .contentShape(Rectangle())
+            .foregroundStyle(dragging ? ink : .primary)
+            .highPriorityGesture(drag.exclusively(before: TapGesture().onEnded { beginEntry() }))
+            .onChange(of: dragging) { active in
+                if !active { lastDragStep = 0 }
+            }
+            .accessibilityLabel("Tempo")
+            .accessibilityValue("\(tempo) BPM")
+            .accessibilityAddTraits(.isButton)
+            .accessibilityAction { beginEntry() }
+            .accessibilityAdjustableAction { direction in
+                switch direction {
+                case .increment: adjust(by: 1)
+                case .decrement: adjust(by: -1)
+                @unknown default: break
+                }
+            }
+            .alert("Tempo", isPresented: $editing) {
+                TextField(String(tempo), text: $entry).keyboardType(.numberPad)
+                Button("Cancel", role: .cancel) {}
+                Button("Done") {
+                    if let value = Int(entry), range.contains(value) { tempo = value }
+                }
+                .disabled(!range.contains(Int(entry) ?? 0))
+            } message: {
+                Text(verbatim: "\(range.lowerBound)–\(range.upperBound) BPM")
+            }
+    }
+
+    private var drag: some Gesture {
+        DragGesture(minimumDistance: 5, coordinateSpace: .global)
+            .updating($dragging) { _, active, _ in active = true }
+            .onChanged { value in
+                let step = Int((-value.translation.height / 3).rounded())
+                adjust(by: step - lastDragStep)
+                lastDragStep = step
+            }
+    }
+
+    private func adjust(by delta: Int) {
+        let value = min(range.upperBound, max(range.lowerBound, tempo + delta))
+        if value != tempo { tempo = value }
+    }
+
+    private func beginEntry() {
+        entry = ""
+        editing = true
     }
 }
 
