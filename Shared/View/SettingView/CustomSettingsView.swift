@@ -386,7 +386,7 @@ struct CustomSettingsView: View {
                     }
                 }
                 
-                Text("© 2025 wxmvv.cc. All rights reserved.")
+                Text("© 2025 wxmvv.dev. All rights reserved.")
                     .font(.footnote)
                     .foregroundColor(.secondary)
                     .frame(maxWidth: .infinity, alignment: .center)

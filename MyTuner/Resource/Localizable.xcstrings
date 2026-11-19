@@ -1043,12 +1043,12 @@
         }
       }
     },
-    "© 2025 wxmvv.cc" : {
+    "© 2025 wxmvv.dev" : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "© 2025 wxmvv.cc"
+            "value" : "© 2025 wxmvv.dev"
           }
         }
       }

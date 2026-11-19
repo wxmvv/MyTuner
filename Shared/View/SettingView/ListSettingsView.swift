@@ -270,7 +270,7 @@ struct ListSettingsView: View {
                 .listRowSeparatorTint(Color.primary.opacity(0.2)) // 分割线
                 .listRowBackground(Color.primary.opacity(0.1)) // row背景
                 // copy right
-                Text("© 2025 wxmvv.cc")
+                Text("© 2025 wxmvv.dev")
                     .listRowBackground(Color.white.opacity(0))
                     .font(.footnote)
                     .foregroundColor(.secondary)
