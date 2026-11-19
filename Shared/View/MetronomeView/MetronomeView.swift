@@ -9,11 +9,15 @@ struct MetronomeView: View {
     @AppStorage("metronomeCircleFlash") private var circleFlash = true
     @AppStorage("metronomeScreenFlash") private var screenFlash = false
     @AppStorage("metronomeKeepAwake") private var keepAwake = false
+    @AppStorage("metronomeShowBeatCount") private var showBeatCount = false
     @State private var originalIdleSetting: Bool?
     @State private var sheet: Sheet?
+    @State private var savingSong = false
+    @State private var songName = ""
+    @State private var saveError: String?
 
     private enum Sheet: Int, Identifiable {
-        case presets, meter, options
+        case presets, meter
         var id: Self { self }
     }
 
@@ -25,11 +29,11 @@ struct MetronomeView: View {
         GeometryReader { geometry in
             ScrollView {
                 VStack(spacing: 20) {
-                    presetButton
                     Spacer(minLength: 0)
                     tempoControl
                     beatDisplay(width: min(geometry.size.width - 40, 490))
                     Spacer(minLength: 0)
+                    if showBeatCount { PracticeRecordView(metronome: metronome) }
                     quickControls
                     playbackButton
                     if let message = metronome.errorMessage {
@@ -57,9 +61,7 @@ struct MetronomeView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
-                Button { sheet = .options } label: {
-                    Label("Practice settings", systemImage: "slider.horizontal.3")
-                }
+                presetMenu
             }
         }
         .sheet(item: $sheet) { item in
@@ -69,10 +71,18 @@ struct MetronomeView: View {
             case .meter:
                 MeterSheet(settings: $metronome.settings)
                     .presentationDetents([.medium, .large])
-            case .options:
-                MetronomeOptions(metronome: metronome, circleFlash: $circleFlash,
-                                 screenFlash: $screenFlash, keepAwake: $keepAwake)
             }
+        }
+        .alert("Save current rhythm as song", isPresented: $savingSong) {
+            TextField("Song name", text: $songName)
+            Button("Cancel", role: .cancel) {}
+            Button("Save") { saveCurrentSong() }
+                .disabled(songName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+        }
+        .alert("Song presets", isPresented: Binding(get: { saveError != nil }, set: { if !$0 { saveError = nil } })) {
+            Button("OK", role: .cancel) {}
+        } message: {
+            Text(verbatim: saveError ?? "")
         }
         .onAppear { updateIdleTimer() }
         .onChange(of: keepAwake) { _ in updateIdleTimer() }
@@ -90,23 +100,54 @@ struct MetronomeView: View {
         }
     }
 
-    private var presetButton: some View {
-        Button { sheet = .presets } label: {
-            HStack(spacing: 8) {
-                Image(systemName: "music.note.list")
+    private var presetMenu: some View {
+        Menu {
+            ForEach(presets.presets) { preset in
+                Button {
+                    presets.select(preset)
+                    metronome.settings = preset.settings
+                } label: {
+                    if presets.selectedID == preset.id && metronome.settings == preset.settings {
+                        Label { Text(verbatim: preset.name) } icon: { Image(systemName: "checkmark") }
+                    } else {
+                        Text(verbatim: preset.name)
+                    }
+                }
+            }
+            Divider()
+            Button {
+                songName = ""
+                savingSong = true
+            } label: {
+                Label("Save current rhythm as song", systemImage: "plus")
+            }
+            Button { sheet = .presets } label: {
+                Label("Manage presets", systemImage: "music.note.list")
+            }
+        } label: {
+            HStack(spacing: 4) {
                 if let name = presets.currentName(for: metronome.settings) {
-                    Text(verbatim: name).lineLimit(1)
+                    Text(verbatim: name)
                 } else {
                     Text("Song presets")
                 }
-                Image(systemName: "chevron.down").font(.caption2.bold())
+                Image(systemName: "chevron.down").font(.caption2.bold()).accessibilityHidden(true)
             }
-            .font(.subheadline.weight(.medium))
-            .padding(.horizontal, 16)
-            .frame(minHeight: 44)
-            .practiceGlass(in: Capsule())
+            .lineLimit(1)
         }
-        .buttonStyle(.plain)
+        .menuOrder(.fixed)
+    }
+
+    private func saveCurrentSong() {
+        let name = songName.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !name.isEmpty else { return }
+        let preset = MetronomePreset(name: name, settings: metronome.settings)
+        do {
+            try presets.save(preset)
+            presets.select(preset)
+        } catch {
+            saveError = error.localizedDescription
+        }
     }
 
     private var tempoControl: some View {

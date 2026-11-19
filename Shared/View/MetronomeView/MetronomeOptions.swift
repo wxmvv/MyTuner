@@ -1,38 +1,59 @@
 import SwiftUI
 
-struct MetronomeOptions: View {
+struct MetronomeDisplaySettings: View {
+    @AppStorage("metronomeCircleFlash") private var circleFlash = true
+    @AppStorage("metronomeScreenFlash") private var screenFlash = false
+    @AppStorage("metronomeKeepAwake") private var keepAwake = false
+    @AppStorage("metronomeShowBeatCount") private var showBeatCount = false
+
+    var body: some View {
+        Section("Metronome display") {
+            Toggle("Flash beat circles", isOn: $circleFlash)
+            Toggle("Flash the full screen", isOn: $screenFlash)
+            Toggle("Keep screen awake", isOn: $keepAwake)
+            Toggle("Show beat count", isOn: $showBeatCount)
+        }
+        .tint(Color(uiColor: .systemGreen))
+    }
+}
+
+struct PracticeRecordView: View {
     @ObservedObject var metronome: MetronomePlayer
-    @Binding var circleFlash: Bool
-    @Binding var screenFlash: Bool
-    @Binding var keepAwake: Bool
-    @Environment(\.dismiss) private var dismiss
     @State private var confirmReset = false
 
     var body: some View {
-        NavigationStack {
-            Form {
-                Section("Display") {
-                    Toggle("Flash beat circles", isOn: $circleFlash)
-                    Toggle("Flash the full screen", isOn: $screenFlash)
-                    Toggle("Keep screen awake", isOn: $keepAwake)
+        VStack(alignment: .leading, spacing: 4) {
+            HStack {
+                Text("Practice record").font(.subheadline.weight(.semibold))
+                Spacer()
+                Button { confirmReset = true } label: {
+                    Label("Reset practice record", systemImage: "arrow.counterclockwise")
+                        .labelStyle(.iconOnly)
+                        .frame(minWidth: 44, minHeight: 44)
                 }
-                Section("Practice record") {
-                    LabeledContent("Completed measures") { Text(metronome.totalMeasures, format: .number) }
-                    LabeledContent("Total beats") { Text(metronome.totalBeats, format: .number) }
-                    Button("Reset practice record", role: .destructive) { confirmReset = true }
-                        .disabled(metronome.totalBeats == 0 && metronome.totalMeasures == 0)
-                }
+                .disabled(metronome.totalBeats == 0 && metronome.totalMeasures == 0)
             }
-            .navigationTitle("Practice settings")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .confirmationAction) { Button("Done") { dismiss() } }
-            }
-            .confirmationDialog("Reset practice record?", isPresented: $confirmReset, titleVisibility: .visible) {
-                Button("Reset", role: .destructive) { metronome.resetRecords() }
-                Button("Cancel", role: .cancel) {}
+            HStack(alignment: .top, spacing: 16) {
+                counter("Completed measures", metronome.totalMeasures)
+                counter("Total beats", metronome.totalBeats)
             }
         }
+        .padding(.horizontal, 15)
+        .padding(.bottom, 14)
+        .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 20, style: .continuous))
+        .confirmationDialog("Reset practice record?", isPresented: $confirmReset, titleVisibility: .visible) {
+            Button("Reset", role: .destructive) { metronome.resetRecords() }
+            Button("Cancel", role: .cancel) {}
+        }
+    }
+
+    private func counter(_ title: LocalizedStringKey, _ value: Int) -> some View {
+        VStack(alignment: .leading, spacing: 2) {
+            Text(title).font(.caption).foregroundStyle(.secondary)
+            Text(value, format: .number).font(.title3.monospacedDigit())
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .accessibilityElement(children: .combine)
     }
 }
 

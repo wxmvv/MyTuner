@@ -66,11 +66,13 @@ struct ListSettingsView: View {
     var conductor: TunerConductor? = nil
     var instrumentConductor: InstrumentConductor? = nil
     var isSheet: Bool = false
+    var metronomeFirst = false
     
     var body: some View {
         NavigationStack{
             List {
                 Group{
+                    if metronomeFirst { MetronomeDisplaySettings() }
                     // Permissions
                     Section("Permissions"){
                         MicPermissionButton(micPermissionStatus: $micPermissionStatus)
@@ -195,6 +197,7 @@ struct ListSettingsView: View {
 
                     }
                     
+                    if !metronomeFirst { MetronomeDisplaySettings() }
 #if !targetEnvironment(macCatalyst)
                     // Appicon
                     Section("App Icon") {

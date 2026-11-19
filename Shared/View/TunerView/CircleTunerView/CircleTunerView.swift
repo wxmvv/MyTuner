@@ -37,12 +37,13 @@ struct CircleTunerView: View {
                 }
             }
             .sheet(isPresented: $showSettingsSheet) {
-                ListSettingsViewSheet(conductor: conductor, instrumentConductor: instrumentConductor, showSettingsSheet: $showSettingsSheet)
+                ListSettingsView(conductor: conductor, instrumentConductor: instrumentConductor,
+                                 isSheet: true, metronomeFirst: showMetronome)
                     .presentationBackground(Material.regular)
             }
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    if !showMetronome {
+                if !showMetronome {
+                    ToolbarItem(placement: .navigationBarLeading) {
                         TuningModePicker(conductor: conductor, toolbarLabel: true)
                     }
                 }
@@ -61,12 +62,10 @@ struct CircleTunerView: View {
                         }
                     }
 
-                    if !showMetronome {
-                        Button {
-                            showSettingsSheet = true
-                        } label: {
-                            Label("Settings", systemImage: "gearshape")
-                        }
+                    Button {
+                        showSettingsSheet = true
+                    } label: {
+                        Label("Settings", systemImage: "gearshape")
                     }
                 }
             }
