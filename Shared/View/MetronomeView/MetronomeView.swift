@@ -13,9 +13,14 @@ struct MetronomeView: View {
     @AppStorage("metronomeShowBeatCount") private var showBeatCount = false
     @State private var originalIdleSetting: Bool?
     @State private var sheet: Sheet?
+    @State private var showingPresetMenu = false
+    @State private var nextPresetAction: PresetAction?
+    @ScaledMetric(relativeTo: .body) private var menuRowHeight: CGFloat = 46
     @State private var savingSong = false
     @State private var songName = ""
     @State private var saveError: String?
+
+    private enum PresetAction { case save, manage }
 
     private enum Sheet: Int, Identifiable {
         case presets, meter
@@ -69,6 +74,7 @@ struct MetronomeView: View {
             switch item {
             case .presets:
                 MetronomePresetsView(settings: $metronome.settings, library: presets)
+                    .presentationBackground(Material.regular)
             case .meter:
                 MeterSheet(settings: $metronome.settings)
                     .presentationDetents([.medium, .large])
@@ -125,35 +131,67 @@ struct MetronomeView: View {
     }
 
     private var presetMenu: some View {
-        Menu {
-            ForEach(presets.presets) { preset in
-                Button {
-                    presets.select(preset)
-                    metronome.settings = preset.settings
-                } label: {
-                    if presets.selectedID == preset.id && metronome.settings == preset.settings {
-                        Label { Text(verbatim: preset.name) } icon: { Image(systemName: "checkmark") }
-                    } else {
-                        Text(verbatim: preset.name)
-                    }
-                }
-            }
-            Divider()
-            Button {
-                songName = ""
-                savingSong = true
-            } label: {
-                Label("Save song", systemImage: "plus")
-            }
-            Button { sheet = .presets } label: {
-                Label("Manage", systemImage: "music.note.list")
-            }
-        } label: {
+        Button { showingPresetMenu = true } label: {
             Label("Song presets", systemImage: "music.note.list")
                 .labelStyle(.iconOnly)
         }
         .accessibilityValue(Text(verbatim: presets.currentName(for: metronome.settings) ?? ""))
-        .menuOrder(.fixed)
+        .popover(isPresented: $showingPresetMenu, attachmentAnchor: .rect(.bounds), arrowEdge: .top) {
+            ScrollView {
+                LazyVStack(alignment: .leading, spacing: 0) {
+                    ForEach(presets.presets) { preset in
+                        let selected = presets.selectedID == preset.id && metronome.settings == preset.settings
+                        Button {
+                            presets.select(preset)
+                            metronome.settings = preset.settings
+                            showingPresetMenu = false
+                        } label: {
+                            HStack {
+                                Text(verbatim: preset.name).lineLimit(2)
+                                Spacer()
+                                if selected { Image(systemName: "checkmark") }
+                            }
+                            .frame(minHeight: menuRowHeight)
+                            .contentShape(Rectangle())
+                        }
+                        .accessibilityAddTraits(selected ? .isSelected : [])
+                    }
+                    if !presets.presets.isEmpty { Divider() }
+                    presetActionButton("Save song", icon: "plus", action: .save)
+                    presetActionButton("Manage", icon: "music.note.list", action: .manage)
+                }
+                .padding(.horizontal, 16)
+                .padding(.vertical, 6)
+            }
+            .buttonStyle(.plain)
+            .scrollBounceBehavior(.basedOnSize)
+            .frame(width: 250, height: min(360, CGFloat(presets.presets.count + 2) * menuRowHeight + 14))
+            .presentationCompactAdaptation(.popover)
+            .presentationBackground(Material.regular)
+            .onDisappear {
+                switch nextPresetAction {
+                case .save:
+                    songName = ""
+                    savingSong = true
+                case .manage:
+                    sheet = .presets
+                case nil:
+                    break
+                }
+                nextPresetAction = nil
+            }
+        }
+    }
+
+    private func presetActionButton(_ title: LocalizedStringKey, icon: String, action: PresetAction) -> some View {
+        Button {
+            nextPresetAction = action
+            showingPresetMenu = false
+        } label: {
+            Label(title, systemImage: icon)
+                .frame(maxWidth: .infinity, minHeight: menuRowHeight, alignment: .leading)
+                .contentShape(Rectangle())
+        }
     }
 
     private func saveCurrentSong() {

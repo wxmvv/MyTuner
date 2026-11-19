@@ -224,6 +224,7 @@ struct MetronomePresetsView: View {
                     .disabled(library.presets.isEmpty)
                 }
             }
+            .scrollContentBackground(.hidden)
             .navigationTitle("Song presets")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -241,6 +242,7 @@ struct MetronomePresetsView: View {
                         settings = updated.settings
                     }
                 }
+                .presentationBackground(Material.regular)
             }
             .fileImporter(isPresented: $importing, allowedContentTypes: [.json]) { result in
                 Task { @MainActor in
@@ -333,6 +335,7 @@ private struct PresetEditor: View {
                         .disabled(draft.settings == current)
                 }
             }
+            .scrollContentBackground(.hidden)
             .navigationTitle(isNew ? Text("New preset") : Text("Edit preset"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
