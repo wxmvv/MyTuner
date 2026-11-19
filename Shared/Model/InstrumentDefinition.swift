@@ -7,6 +7,10 @@ enum InstrumentDefinition: Int, CaseIterable {
     case bass = 33
     case marimba = 12
 
+    static func atStoredIndex(_ index: Int) -> Self {
+        allCases[min(allCases.count - 1, max(0, index))]
+    }
+
     var displayName: LocalizedStringKey {
         switch self {
         case .guitar: return "Guitar"

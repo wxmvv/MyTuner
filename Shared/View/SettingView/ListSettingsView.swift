@@ -177,7 +177,7 @@ struct ListSettingsView: View {
                                 Text("Sound")
                                     .foregroundColor(.primary)
                                 Spacer()
-                                Text(availableInstruments[instrumentIndex].displayName) 
+                                Text(InstrumentDefinition.atStoredIndex(instrumentIndex).displayName)
                                     .foregroundColor(.primary.opacity(0.7))
                             }
                         }

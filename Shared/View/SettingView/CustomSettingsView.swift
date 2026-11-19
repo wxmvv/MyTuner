@@ -102,7 +102,7 @@ struct CustomSettingsView: View {
                     
                     Menu {
                         ForEach(tuningModes, id: \.self) { val in
-                            Button(String(val.name)) {
+                            Button(val.name) {
                                 tuningMode = val
                             }
                         }
@@ -111,7 +111,7 @@ struct CustomSettingsView: View {
                             Text("Mode")
                                 .foregroundColor(.primary)
                             Spacer()
-                            Text(String(tuningMode.name) )
+                            Text(tuningMode.name)
                                 .foregroundColor(.primary.opacity(0.7))
                         }
                         .padding()
@@ -152,7 +152,7 @@ struct CustomSettingsView: View {
                     // preferredName
                     Menu {
                         ForEach(ModifierPreference.allCases, id: \.self) { val in
-                            Button(String(val.name)) {
+                            Button(val.name) {
                                 preferredName = val
                             }
                         }
@@ -161,7 +161,7 @@ struct CustomSettingsView: View {
                             Text("Preferred Name")
                                 .foregroundColor(.primary)
                             Spacer()
-                            Text(String(preferredName.name) )
+                            Text(preferredName.name)
                                 .foregroundColor(.primary.opacity(0.7))
                         }
                         .padding()
@@ -289,7 +289,7 @@ struct CustomSettingsView: View {
                             Text("Sound")
                                 .foregroundColor(.primary)
                             Spacer()
-                            Text(String(availableInstruments[instrumentIndex].displayName) )
+                            Text(InstrumentDefinition.atStoredIndex(instrumentIndex).displayName)
                                 .foregroundColor(.primary.opacity(0.7))
                         }
                     }

@@ -28,7 +28,7 @@ final class InstrumentConductor: ObservableObject, HasAudioEngine {
     }
 
     private func loadSelectedInstrument() {
-        let selection = availableInstruments.indices.contains(instrumentIndex) ? availableInstruments[instrumentIndex] : .guitar
+        let selection = InstrumentDefinition.atStoredIndex(instrumentIndex)
         guard selection != loadedInstrument else { return }
         releaseNote()
         guard let bankURL else {
