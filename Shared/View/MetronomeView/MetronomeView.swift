@@ -174,8 +174,6 @@ struct MetronomeView: View {
                     }
                 }
             }
-            Text("Tap a beat to change its accent")
-                .font(.footnote).foregroundStyle(.secondary)
         }
         .padding(.vertical, 12)
     }
