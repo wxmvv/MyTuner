@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MyNavigationTitle: ViewModifier {
-    var text: String
+    var text: LocalizedStringKey
     var show: Bool
     func body(content: Content) -> some View {
         if !show {
@@ -22,7 +22,7 @@ struct MyNavigationTitle: ViewModifier {
 }
 
 extension View {
-    func myNavBarTitle(_ text: String,show: Bool) -> some View {
+    func myNavBarTitle(_ text: LocalizedStringKey,show: Bool) -> some View {
         modifier(MyNavigationTitle(text: text, show: show))
     }
 }

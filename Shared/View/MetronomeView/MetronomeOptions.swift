@@ -107,10 +107,16 @@ struct MeterSheet: View {
                     NavigationLink {
                         CustomMeter(meter: current, apply: apply)
                     } label: {
-                        LabeledContent("Custom meter") {
-                            if !common.contains(current) { Text(verbatim: current.label) }
+                        HStack {
+                            Text("Custom meter")
+                            Spacer()
+                            if !common.contains(current) {
+                                Text(verbatim: current.label).foregroundStyle(.secondary)
+                            }
                         }
                     }
+                    .accessibilityLabel("Custom meter")
+                    .accessibilityValue(Text(verbatim: common.contains(current) ? "" : current.label))
                 }
             }
             .navigationTitle("Meter")
