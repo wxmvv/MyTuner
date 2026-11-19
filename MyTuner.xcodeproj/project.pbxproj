@@ -168,13 +168,6 @@
 			);
 			target = C4E24A702D914AAE00E260C1 /* MyTuner */;
 		};
-		C49455362DDB522900A22CF6 /* Exceptions for "Preview Content" folder in "MyTuner" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Sounds,
-			);
-			target = C4E24A702D914AAE00E260C1 /* MyTuner */;
-		};
 		C49455372DDB522900A22CF6 /* Exceptions for "Preview Content" folder in "MyTuner Dev" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -205,7 +198,6 @@
 		C49455332DDB522900A22CF6 /* Preview Content */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				C49455362DDB522900A22CF6 /* Exceptions for "Preview Content" folder in "MyTuner" target */,
 				C49455372DDB522900A22CF6 /* Exceptions for "Preview Content" folder in "MyTuner Dev" target */,
 			);
 			explicitFolders = (
