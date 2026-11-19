@@ -64,7 +64,6 @@ struct MetronomeView: View {
             }
             .ignoresSafeArea()
         }
-        .navigationTitle("Metronome")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
