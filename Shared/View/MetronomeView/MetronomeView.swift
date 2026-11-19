@@ -33,30 +33,31 @@ struct MetronomeView: View {
 
     var body: some View {
         GeometryReader { geometry in
-            ScrollView {
+            let size = geometry.size
+            let landscape = size.width > size.height && size.width >= 540
+            let compact = size.height < (landscape ? 420 : 630)
+            if landscape {
+                let columnGap: CGFloat = compact ? 28 : 48
+                let width = min(size.width - 40, 960)
+                let rhythmWidth = (width - columnGap) * 0.55
+                HStack(spacing: columnGap) {
+                    rhythmPanel(width: rhythmWidth, compact: compact)
+                        .frame(width: rhythmWidth)
+                    practiceControls
+                }
+                .frame(width: width)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            } else {
+                let width = max(0, min(size.width - 40, 490))
                 VStack(spacing: 0) {
                     Spacer(minLength: 0)
-                    VStack(spacing: 16) {
-                        songHeading
-                        VStack(spacing: 24) {
-                            beatDisplay(width: min(geometry.size.width - 40, 490))
-                            tempoControl
-                        }
-                    }
-                    Spacer(minLength: 32)
-                    VStack(spacing: 12) {
-                        if showBeatCount { PracticeRecordView(metronome: metronome) }
-                        quickControls
-                        playbackButton
-                        if let message = metronome.errorMessage {
-                            Text(message).font(.footnote).foregroundStyle(.red)
-                        }
-                    }
+                    rhythmPanel(width: width, compact: compact)
+                    Spacer(minLength: compact ? 10 : 32)
+                    practiceControls
                 }
-                .frame(maxWidth: 490)
-                .padding(.horizontal, 20)
-                .padding(.vertical, 16)
-                .frame(maxWidth: .infinity, minHeight: geometry.size.height)
+                .frame(width: width)
+                .padding(.vertical, compact ? 8 : 16)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
         }
         .background {
@@ -113,12 +114,33 @@ struct MetronomeView: View {
         }
     }
 
-    private var songHeading: some View {
+    private func rhythmPanel(width: CGFloat, compact: Bool) -> some View {
+        VStack(spacing: compact ? 6 : 16) {
+            songHeading(lines: compact ? 1 : 2)
+            VStack(spacing: compact ? 10 : 24) {
+                beatDisplay(width: width, gap: compact ? 6 : 10)
+                tempoControl(compact: compact)
+            }
+        }
+    }
+
+    private var practiceControls: some View {
+        VStack(spacing: 12) {
+            if showBeatCount { PracticeRecordView(metronome: metronome) }
+            quickControls
+            playbackButton
+            if let message = metronome.errorMessage {
+                Text(message).font(.footnote).foregroundStyle(.red)
+            }
+        }
+    }
+
+    private func songHeading(lines: Int) -> some View {
         let name = presets.currentName(for: metronome.settings)
         // Size the space above BPM independently of the song, including at larger text sizes.
         return Text(verbatim: " ")
             .font(.headline)
-            .lineLimit(2, reservesSpace: true)
+            .lineLimit(lines, reservesSpace: true)
             .fixedSize(horizontal: false, vertical: true)
             .hidden()
             .frame(maxWidth: .infinity)
@@ -127,7 +149,7 @@ struct MetronomeView: View {
                     Text(verbatim: name)
                         .font(.headline)
                         .multilineTextAlignment(.center)
-                        .lineLimit(2)
+                        .lineLimit(lines)
                         .accessibilityAddTraits(.isHeader)
                         .id(name)
                         .transition(.opacity)
@@ -212,7 +234,7 @@ struct MetronomeView: View {
         }
     }
 
-    private var tempoControl: some View {
+    private func tempoControl(compact: Bool) -> some View {
         VStack(spacing: 4) {
             HStack(spacing: 4) {
                 Text("BPM").tracking(2)
@@ -223,7 +245,7 @@ struct MetronomeView: View {
             .accessibilityHidden(true)
             HStack {
                 tempoButton(-1)
-                TempoReadout(tempo: $metronome.settings.tempo, ink: ink)
+                TempoReadout(tempo: $metronome.settings.tempo, ink: ink, fontSize: compact ? 68 : 88)
                 tempoButton(1)
             }
             Text(verbatim: metronome.settings.tempoTerm)
@@ -247,9 +269,8 @@ struct MetronomeView: View {
         .disabled(delta > 0 ? metronome.settings.tempo >= limit.upperBound : metronome.settings.tempo <= limit.lowerBound)
     }
 
-    private func beatDisplay(width: CGFloat) -> some View {
+    private func beatDisplay(width: CGFloat, gap: CGFloat) -> some View {
         let count = metronome.settings.numerator
-        let gap: CGFloat = 10
         let capacity = max(1, Int((width + gap) / (BeatCircle.diameter + gap)))
         let rows = (count + capacity - 1) / capacity
         let columns = (count + rows - 1) / rows
@@ -341,6 +362,7 @@ struct MetronomeView: View {
 private struct TempoReadout: View {
     @Binding var tempo: Int
     let ink: Color
+    let fontSize: CGFloat
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.scenePhase) private var scenePhase
     @GestureState private var dragging = false
@@ -353,7 +375,7 @@ private struct TempoReadout: View {
 
     var body: some View {
         Text(verbatim: String(tempo))
-            .font(.system(size: 88, weight: .light, design: .rounded))
+            .font(.system(size: fontSize, weight: .light, design: .rounded))
             .monospacedDigit().lineLimit(1).minimumScaleFactor(0.5)
             .frame(maxWidth: .infinity)
             .contentShape(Rectangle())
