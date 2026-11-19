@@ -22,8 +22,7 @@ struct MinimalInstrumentView: View {
             HStack(spacing: 0) {
                 ForEach(instrument.notes(referenceFrequency: Float(pitchStandard))) { note in
                     Button {
-                        print("note.frequency \(note.frequency)")
-                        instrumentConductor.playNote(note:MIDINoteNumber(note.midi))
+                        instrumentConductor.playNote(note: MIDINoteNumber(note.midi), pitchStandard: pitchStandard)
                     } label :{
                         noteButtonLabel(note.noteNameString, isSelected: dev || conductor.data.targetMidi == note.midi)
                             .padding(.horizontal, 6)
