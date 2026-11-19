@@ -82,10 +82,11 @@ struct CircleTunerView: View {
             CircleTuner(tunerData: conductor.data)
                 .ignoresSafeArea()
 
-            VStack(spacing: 0) {
-                Spacer()
-                MinimalInstrumentView(instrumentConductor: instrumentConductor, conductor: conductor)
-                    .offset(y: tuningMode == .instrument ? 0 : 100)
+            if tuningMode == .instrument {
+                VStack(spacing: 0) {
+                    Spacer()
+                    MinimalInstrumentView(instrumentConductor: instrumentConductor, conductor: conductor)
+                }
             }
         }
         .onAppear {
