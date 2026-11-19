@@ -244,6 +244,16 @@
     "Custom Settings" : {
 
     },
+    "Custom meter" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "自定义拍号"
+          }
+        }
+      }
+    },
     "Decrease tempo" : {
       "localizations" : {
         "zh-Hans" : {
@@ -421,6 +431,16 @@
     "List Settings" : {
 
     },
+    "Manage presets" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "管理曲目预设"
+          }
+        }
+      }
+    },
     "Marimba" : {
       "localizations" : {
         "zh-Hans" : {
@@ -465,6 +485,16 @@
     },
     "Mode" : {
 
+    },
+    "Metronome display" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "节拍器显示"
+          }
+        }
+      }
     },
     "Mute" : {
       "localizations" : {
@@ -659,6 +689,16 @@
         }
       }
     },
+    "Save current rhythm as song" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "将当前节奏保存为曲目"
+          }
+        }
+      }
+    },
     "Secondary accent" : {
       "localizations" : {
         "zh-Hans" : {
@@ -674,6 +714,16 @@
     },
     "Settings Views" : {
 
+    },
+    "Show beat count" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "显示拍子计数"
+          }
+        }
+      }
     },
     "Song name" : {
       "localizations" : {
@@ -714,16 +764,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "停止"
-          }
-        }
-      }
-    },
-    "Tap a beat to change its accent" : {
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "点按圆圈可切换节拍强弱或静音"
           }
         }
       }
