@@ -31,6 +31,7 @@ struct MetronomeView: View {
             ScrollView {
                 VStack(spacing: 20) {
                     songHeading
+                    Spacer(minLength: 0)
                     tempoControl
                     beatDisplay(width: min(geometry.size.width - 40, 490))
                     Spacer(minLength: 0)
@@ -108,7 +109,7 @@ struct MetronomeView: View {
             .lineLimit(2, reservesSpace: true)
             .fixedSize(horizontal: false, vertical: true)
             .hidden()
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+            .frame(maxWidth: .infinity)
             .overlay(alignment: .top) {
                 if let name {
                     Text(verbatim: name)
