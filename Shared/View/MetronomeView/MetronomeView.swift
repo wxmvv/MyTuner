@@ -34,17 +34,23 @@ struct MetronomeView: View {
     var body: some View {
         GeometryReader { geometry in
             ScrollView {
-                VStack(spacing: 20) {
-                    songHeading
+                VStack(spacing: 0) {
                     Spacer(minLength: 0)
-                    tempoControl
-                    beatDisplay(width: min(geometry.size.width - 40, 490))
-                    Spacer(minLength: 0)
-                    if showBeatCount { PracticeRecordView(metronome: metronome) }
-                    quickControls
-                    playbackButton
-                    if let message = metronome.errorMessage {
-                        Text(message).font(.footnote).foregroundStyle(.red)
+                    VStack(spacing: 16) {
+                        songHeading
+                        VStack(spacing: 24) {
+                            beatDisplay(width: min(geometry.size.width - 40, 490))
+                            tempoControl
+                        }
+                    }
+                    Spacer(minLength: 32)
+                    VStack(spacing: 12) {
+                        if showBeatCount { PracticeRecordView(metronome: metronome) }
+                        quickControls
+                        playbackButton
+                        if let message = metronome.errorMessage {
+                            Text(message).font(.footnote).foregroundStyle(.red)
+                        }
                     }
                 }
                 .frame(maxWidth: 490)
@@ -116,7 +122,7 @@ struct MetronomeView: View {
             .fixedSize(horizontal: false, vertical: true)
             .hidden()
             .frame(maxWidth: .infinity)
-            .overlay(alignment: .top) {
+            .overlay(alignment: .bottom) {
                 if let name {
                     Text(verbatim: name)
                         .font(.headline)
@@ -243,12 +249,13 @@ struct MetronomeView: View {
 
     private func beatDisplay(width: CGFloat) -> some View {
         let count = metronome.settings.numerator
-        let capacity = max(1, Int((width - 24) / 54))
+        let gap: CGFloat = 10
+        let capacity = max(1, Int((width + gap) / (BeatCircle.diameter + gap)))
         let rows = (count + capacity - 1) / capacity
         let columns = (count + rows - 1) / rows
-        return VStack(spacing: 10) {
+        return VStack(spacing: gap) {
             ForEach(0..<rows, id: \.self) { row in
-                HStack(spacing: 6) {
+                HStack(spacing: gap) {
                     ForEach((row * columns)..<min(count, (row + 1) * columns), id: \.self) { index in
                         let accent = metronome.settings.beats[index]
                         let lit = circleFlash && metronome.currentBeat == index + 1 && metronome.isFlashing
@@ -265,7 +272,6 @@ struct MetronomeView: View {
                 }
             }
         }
-        .padding(.vertical, 12)
     }
 
     private var quickControls: some View {
@@ -398,6 +404,7 @@ private struct TempoReadout: View {
 }
 
 private struct BeatCircle: View {
+    static let diameter: CGFloat = 46
     var accent: BeatAccent
     var lit: Bool
     var ink: Color
@@ -418,7 +425,7 @@ private struct BeatCircle: View {
             .font(.headline.bold())
             .foregroundStyle(lit ? Color(uiColor: .systemBackground) : ink)
         }
-        .frame(width: 46, height: 46)
+        .frame(width: Self.diameter, height: Self.diameter)
         .shadow(color: lit ? ink.opacity(0.38) : .clear, radius: 6)
     }
 }
