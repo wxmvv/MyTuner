@@ -57,10 +57,9 @@ struct CircleTunerView: View {
                                 Text("Metronome")
                             }
                         } icon: {
-                            Image(systemName: "metronome")
+                            Image(systemName: showMetronome ? "tuningfork" : "metronome")
                         }
                     }
-                    .tint(showMetronome ? .mint : .primary)
 
                     if !showMetronome {
                         Button {
