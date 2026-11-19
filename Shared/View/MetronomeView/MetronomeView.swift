@@ -4,6 +4,7 @@ import SwiftUI
 struct MetronomeView: View {
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.colorScheme) private var colorScheme
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @StateObject private var metronome = MetronomePlayer()
     @StateObject private var presets = MetronomePresetLibrary()
     @AppStorage("metronomeCircleFlash") private var circleFlash = true
@@ -29,14 +30,7 @@ struct MetronomeView: View {
         GeometryReader { geometry in
             ScrollView {
                 VStack(spacing: 20) {
-                    if let name = presets.currentName(for: metronome.settings) {
-                        Text(verbatim: name)
-                            .font(.headline)
-                            .multilineTextAlignment(.center)
-                            .lineLimit(2)
-                            .accessibilityAddTraits(.isHeader)
-                    }
-                    Spacer(minLength: 0)
+                    songHeading
                     tempoControl
                     beatDisplay(width: min(geometry.size.width - 40, 490))
                     Spacer(minLength: 0)
@@ -104,6 +98,29 @@ struct MetronomeView: View {
             metronome.stop()
             restoreIdleTimer()
         }
+    }
+
+    private var songHeading: some View {
+        let name = presets.currentName(for: metronome.settings)
+        // Size the space above BPM independently of the song, including at larger text sizes.
+        return Text(verbatim: " ")
+            .font(.headline)
+            .lineLimit(2, reservesSpace: true)
+            .fixedSize(horizontal: false, vertical: true)
+            .hidden()
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+            .overlay(alignment: .top) {
+                if let name {
+                    Text(verbatim: name)
+                        .font(.headline)
+                        .multilineTextAlignment(.center)
+                        .lineLimit(2)
+                        .accessibilityAddTraits(.isHeader)
+                        .id(name)
+                        .transition(.opacity)
+                }
+            }
+            .animation(reduceMotion ? nil : .easeInOut(duration: 0.22), value: name)
     }
 
     private var presetMenu: some View {
