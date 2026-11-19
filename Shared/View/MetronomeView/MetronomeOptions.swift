@@ -19,14 +19,13 @@ struct MetronomeDisplaySettings: View {
 
 struct PracticeRecordView: View {
     @ObservedObject var metronome: MetronomePlayer
-    @State private var confirmReset = false
 
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
             HStack {
                 Text("Practice record").font(.subheadline.weight(.semibold))
                 Spacer()
-                Button { confirmReset = true } label: {
+                Button(action: metronome.resetRecords) {
                     Label("Reset practice record", systemImage: "arrow.counterclockwise")
                         .labelStyle(.iconOnly)
                         .frame(minWidth: 44, minHeight: 44)
@@ -41,10 +40,6 @@ struct PracticeRecordView: View {
         .padding(.horizontal, 15)
         .padding(.bottom, 14)
         .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 20, style: .continuous))
-        .confirmationDialog("Reset practice record?", isPresented: $confirmReset, titleVisibility: .visible) {
-            Button("Reset", role: .destructive) { metronome.resetRecords() }
-            Button("Cancel", role: .cancel) {}
-        }
     }
 
     private func counter(_ title: LocalizedStringKey, _ value: Int) -> some View {
