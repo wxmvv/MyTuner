@@ -31,12 +31,12 @@
         }
       }
     },
-    "© 2025 wxmvv.cc" : {
+    "%lld BPM" : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "© 2025 wxmvv.cc"
+            "value" : "%lld BPM"
           }
         }
       }
@@ -57,6 +57,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "关于"
+          }
+        }
+      }
+    },
+    "Accent" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "重音"
           }
         }
       }
@@ -111,6 +121,36 @@
         }
       }
     },
+    "Beat %lld" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "第 %lld 拍"
+          }
+        }
+      }
+    },
+    "Beat pattern" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "逐拍强弱"
+          }
+        }
+      }
+    },
+    "Beat unit" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "单位拍"
+          }
+        }
+      }
+    },
     "Beats per measure" : {
       "localizations" : {
         "zh-Hans" : {
@@ -121,12 +161,42 @@
         }
       }
     },
+    "Bell" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "铃声"
+          }
+        }
+      }
+    },
     "BPM" : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "BPM"
+          }
+        }
+      }
+    },
+    "Cancel" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "取消"
+          }
+        }
+      }
+    },
+    "Choose a MyTuner preset file." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "请选择 MyTuner 导出的曲目预设文件。"
           }
         }
       }
@@ -163,12 +233,52 @@
         }
       }
     },
+    "Click" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "电子声"
+          }
+        }
+      }
+    },
+    "Click sound" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "节拍音色"
+          }
+        }
+      }
+    },
     "Close" : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "关闭"
+          }
+        }
+      }
+    },
+    "Common meters" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "常用拍号"
+          }
+        }
+      }
+    },
+    "Completed measures" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "累计完整小节"
           }
         }
       }
@@ -203,6 +313,26 @@
         }
       }
     },
+    "Delete preset" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "删除预设"
+          }
+        }
+      }
+    },
+    "Display" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "显示"
+          }
+        }
+      }
+    },
     "Done" : {
       "localizations" : {
         "zh-Hans" : {
@@ -223,6 +353,16 @@
         }
       }
     },
+    "Edit preset" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "编辑预设"
+          }
+        }
+      }
+    },
     "Electric" : {
       "localizations" : {
         "zh-Hans" : {
@@ -233,12 +373,42 @@
         }
       }
     },
+    "Export presets" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "导出预设"
+          }
+        }
+      }
+    },
     "Fast" : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "稍快"
+          }
+        }
+      }
+    },
+    "Flash beat circles" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "节拍圆圈闪烁"
+          }
+        }
+      }
+    },
+    "Flash the full screen" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "全屏随拍闪烁"
           }
         }
       }
@@ -259,6 +429,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "吉他"
+          }
+        }
+      }
+    },
+    "Import presets" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "导入预设"
           }
         }
       }
@@ -293,12 +473,42 @@
         }
       }
     },
+    "Keep screen awake" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "保持屏幕常亮"
+          }
+        }
+      }
+    },
     "Leave a Review" : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "留下评论"
+          }
+        }
+      }
+    },
+    "Marimba" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "马林巴"
+          }
+        }
+      }
+    },
+    "Meter" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "拍号"
           }
         }
       }
@@ -333,6 +543,36 @@
         }
       }
     },
+    "Mute" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "静音"
+          }
+        }
+      }
+    },
+    "New preset" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "新建预设"
+          }
+        }
+      }
+    },
+    "No new presets to import." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "这些曲目预设都已在列表中。"
+          }
+        }
+      }
+    },
     "Normal" : {
       "localizations" : {
         "zh-Hans" : {
@@ -349,6 +589,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "八音盒"
+          }
+        }
+      }
+    },
+    "OK" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "好"
           }
         }
       }
@@ -393,6 +643,26 @@
         }
       }
     },
+    "Practice record" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "练习记录"
+          }
+        }
+      }
+    },
+    "Practice settings" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "练习设置"
+          }
+        }
+      }
+    },
     "Preferred Name" : {
       "localizations" : {
         "zh-Hans" : {
@@ -403,12 +673,62 @@
         }
       }
     },
+    "Preset actions" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "预设操作"
+          }
+        }
+      }
+    },
+    "Presets added: %lld" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "已导入 %lld 个预设"
+          }
+        }
+      }
+    },
     "Request microphone permission.." : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "请求麦克权限"
+          }
+        }
+      }
+    },
+    "Reset" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "重置"
+          }
+        }
+      }
+    },
+    "Reset practice record" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "重置练习记录"
+          }
+        }
+      }
+    },
+    "Reset practice record?" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "重置练习记录？"
           }
         }
       }
@@ -429,6 +749,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "响应速度"
+          }
+        }
+      }
+    },
+    "Save" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "保存"
+          }
+        }
+      }
+    },
+    "Secondary accent" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "次重音"
           }
         }
       }
@@ -473,6 +813,26 @@
         }
       }
     },
+    "Song name" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "曲名"
+          }
+        }
+      }
+    },
+    "Song presets" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "曲目预设"
+          }
+        }
+      }
+    },
     "Sound" : {
       "localizations" : {
         "zh-Hans" : {
@@ -503,6 +863,26 @@
         }
       }
     },
+    "Tap a beat to change its accent" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "点按圆圈可切换节拍强弱或静音"
+          }
+        }
+      }
+    },
+    "Tap to change accent" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "点按以切换节拍强弱或静音"
+          }
+        }
+      }
+    },
     "Tempo" : {
       "localizations" : {
         "zh-Hans" : {
@@ -513,12 +893,42 @@
         }
       }
     },
+    "This preset file uses an unsupported version." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "暂不支持此预设文件的版本。"
+          }
+        }
+      }
+    },
+    "Time signature" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "拍号设置"
+          }
+        }
+      }
+    },
     "Tone" : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "声音"
+          }
+        }
+      }
+    },
+    "Total beats" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "累计拍数"
           }
         }
       }
@@ -559,6 +969,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "无法启动节拍器。"
+          }
+        }
+      }
+    },
+    "Use current rhythm" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "使用当前节奏"
           }
         }
       }
@@ -609,6 +1029,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "潮湿吉他"
+          }
+        }
+      }
+    },
+    "Wood" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "木鱼"
+          }
+        }
+      }
+    },
+    "© 2025 wxmvv.cc" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "© 2025 wxmvv.cc"
           }
         }
       }
