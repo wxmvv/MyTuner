@@ -39,36 +39,55 @@ struct MetronomeOptions: View {
 struct MeterSheet: View {
     @Binding var settings: MetronomeSettings
     @Environment(\.dismiss) private var dismiss
+    @ScaledMetric private var cellWidth: CGFloat = 66
+
+    private struct Meter: Hashable {
+        var numerator: Int
+        var denominator: Int
+        var label: String { "\(numerator)/\(denominator)" }
+
+        init(_ numerator: Int, _ denominator: Int) {
+            self.numerator = numerator
+            self.denominator = denominator
+        }
+    }
+
+    private let common = [
+        Meter(2, 4), Meter(3, 4), Meter(4, 4), Meter(2, 2),
+        Meter(3, 8), Meter(6, 8), Meter(9, 8), Meter(12, 8)
+    ]
+
+    private var current: Meter { Meter(settings.numerator, settings.denominator) }
 
     var body: some View {
         NavigationStack {
             Form {
-                Section("Time signature") {
-                    Stepper(value: $settings.numerator, in: MetronomeSettings.beatRange) {
-                        LabeledContent("Beats per measure") {
-                            Text(settings.numerator, format: .number)
-                        }
-                    }
-                    Picker("Beat unit", selection: $settings.denominator) {
-                        ForEach(MetronomeSettings.denominators, id: \.self) { unit in
-                            Text(verbatim: "1/\(unit)").tag(unit)
+                Section("Common meters") {
+                    LazyVGrid(columns: [GridItem(.adaptive(minimum: cellWidth))], spacing: 8) {
+                        ForEach(common, id: \.self) { meter in
+                            Button { apply(meter) } label: {
+                                Text(verbatim: meter.label)
+                                    .font(.headline.monospacedDigit())
+                                    .frame(maxWidth: .infinity, minHeight: 44)
+                                    .background(.primary.opacity(current == meter ? 0.12 : 0.04),
+                                                in: RoundedRectangle(cornerRadius: 10))
+                                    .overlay {
+                                        if current == meter {
+                                            RoundedRectangle(cornerRadius: 10).strokeBorder(.primary, lineWidth: 1.5)
+                                        }
+                                    }
+                            }
+                            .buttonStyle(.plain)
+                            .accessibilityAddTraits(current == meter ? .isSelected : [])
                         }
                     }
                 }
-                Section("Common meters") {
-                    HStack(spacing: 6) {
-                        ForEach([ [2,4], [3,4], [4,4], [6,8] ], id: \.self) { pair in
-                            Button {
-                                var updated = settings
-                                updated.numerator = pair[0]
-                                updated.denominator = pair[1]
-                                settings = updated
-                                dismiss()
-                            } label: {
-                                Text(verbatim: "\(pair[0])/\(pair[1])")
-                                    .frame(maxWidth: .infinity, minHeight: 44)
-                            }
-                            .buttonStyle(.borderless)
+                Section {
+                    NavigationLink {
+                        CustomMeter(meter: current, apply: apply)
+                    } label: {
+                        LabeledContent("Custom meter") {
+                            if !common.contains(current) { Text(verbatim: current.label) }
                         }
                     }
                 }
@@ -77,6 +96,37 @@ struct MeterSheet: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) { Button("Done") { dismiss() } }
+            }
+        }
+    }
+
+    private func apply(_ meter: Meter) {
+        var updated = settings
+        updated.numerator = meter.numerator
+        updated.denominator = meter.denominator
+        settings = updated
+        dismiss()
+    }
+
+    private struct CustomMeter: View {
+        @State var meter: Meter
+        var apply: (Meter) -> Void
+
+        var body: some View {
+            Form {
+                Stepper(value: $meter.numerator, in: MetronomeSettings.beatRange) {
+                    LabeledContent("Beats per measure") { Text(meter.numerator, format: .number) }
+                }
+                Picker("Beat unit", selection: $meter.denominator) {
+                    ForEach(MetronomeSettings.denominators, id: \.self) { unit in
+                        Text(verbatim: "1/\(unit)").tag(unit)
+                    }
+                }
+            }
+            .navigationTitle("Custom meter")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .confirmationAction) { Button("Done") { apply(meter) } }
             }
         }
     }
