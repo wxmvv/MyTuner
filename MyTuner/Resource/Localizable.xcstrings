@@ -503,12 +503,12 @@
         }
       }
     },
-    "Manage presets" : {
+    "Manage" : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "管理曲目预设"
+            "value" : "管理"
           }
         }
       }
@@ -793,12 +793,12 @@
         }
       }
     },
-    "Save current rhythm as song" : {
+    "Save song" : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "将当前节奏保存为曲目"
+            "value" : "保存曲目"
           }
         }
       }

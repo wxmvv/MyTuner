@@ -73,7 +73,7 @@ struct MetronomeView: View {
                     .presentationDetents([.medium, .large])
             }
         }
-        .alert("Save current rhythm as song", isPresented: $savingSong) {
+        .alert("Save song", isPresented: $savingSong) {
             TextField("Song name", text: $songName)
             Button("Cancel", role: .cancel) {}
             Button("Save") { saveCurrentSong() }
@@ -119,22 +119,16 @@ struct MetronomeView: View {
                 songName = ""
                 savingSong = true
             } label: {
-                Label("Save current rhythm as song", systemImage: "plus")
+                Label("Save song", systemImage: "plus")
             }
             Button { sheet = .presets } label: {
-                Label("Manage presets", systemImage: "music.note.list")
+                Label("Manage", systemImage: "music.note.list")
             }
         } label: {
-            HStack(spacing: 4) {
-                if let name = presets.currentName(for: metronome.settings) {
-                    Text(verbatim: name)
-                } else {
-                    Text("Song presets")
-                }
-                Image(systemName: "chevron.down").font(.caption2.bold()).accessibilityHidden(true)
-            }
-            .lineLimit(1)
+            Label("Song presets", systemImage: "music.note.list")
+                .labelStyle(.iconOnly)
         }
+        .accessibilityValue(Text(verbatim: presets.currentName(for: metronome.settings) ?? ""))
         .menuOrder(.fixed)
     }
 
