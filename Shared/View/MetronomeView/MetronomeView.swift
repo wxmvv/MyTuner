@@ -29,6 +29,13 @@ struct MetronomeView: View {
         GeometryReader { geometry in
             ScrollView {
                 VStack(spacing: 20) {
+                    if let name = presets.currentName(for: metronome.settings) {
+                        Text(verbatim: name)
+                            .font(.headline)
+                            .multilineTextAlignment(.center)
+                            .lineLimit(2)
+                            .accessibilityAddTraits(.isHeader)
+                    }
                     Spacer(minLength: 0)
                     tempoControl
                     beatDisplay(width: min(geometry.size.width - 40, 490))
