@@ -69,6 +69,7 @@
 				View/Components/MinimalTopToolbar.swift,
 				View/Components/TuningModePicker.swift,
 				View/InstrumentView/MinimalInstrumentView.swift,
+				View/MetronomeView/MetronomeView.swift,
 				View/SettingView/ListSettingsView.swift,
 				View/SettingView/SettingValues.swift,
 				View/TunerView.swift,
@@ -76,6 +77,7 @@
 				View/TunerView/CircleTunerView/CircleTuner.swift,
 				View/TunerView/CircleTunerView/CircleTunerView.swift,
 				ViewModel/InstrumentConductor.swift,
+				ViewModel/MetronomePlayer.swift,
 				ViewModel/TunerConductor.swift,
 			);
 			target = C4E24A702D914AAE00E260C1 /* MyTuner */;
@@ -105,6 +107,7 @@
 				View/InstrumentView/CookbookKeyboard.swift,
 				View/InstrumentView/DevInstrumentView.swift,
 				View/InstrumentView/MinimalInstrumentView.swift,
+				View/MetronomeView/MetronomeView.swift,
 				View/SettingView/CustomSettingsView.swift,
 				View/SettingView/ListSettingsView.swift,
 				View/SettingView/SettingValues.swift,
@@ -126,6 +129,7 @@
 				View/TunerView/ZenTunerView/NoteTicks.swift,
 				View/TunerView/ZenTunerView/ZenTunerView.swift,
 				ViewModel/InstrumentConductor.swift,
+				ViewModel/MetronomePlayer.swift,
 				ViewModel/TunerConductor.swift,
 			);
 			target = C42F59E72DA14346000F56D5 /* MyTuner Dev */;
