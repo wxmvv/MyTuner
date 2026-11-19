@@ -341,8 +341,11 @@ struct MetronomeView: View {
 private struct TempoReadout: View {
     @Binding var tempo: Int
     let ink: Color
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.scenePhase) private var scenePhase
     @GestureState private var dragging = false
     @State private var lastDragStep = 0
+    @State private var momentum: Task<Void, Never>?
     @State private var editing = false
     @State private var entry = ""
 
@@ -359,11 +362,16 @@ private struct TempoReadout: View {
             .onChange(of: dragging) { active in
                 if !active { lastDragStep = 0 }
             }
+            .onDisappear { momentum?.cancel() }
+            .onChange(of: scenePhase) { phase in
+                if phase != .active { momentum?.cancel() }
+            }
             .accessibilityLabel("Tempo")
             .accessibilityValue("\(tempo) BPM")
             .accessibilityAddTraits(.isButton)
             .accessibilityAction { beginEntry() }
             .accessibilityAdjustableAction { direction in
+                momentum?.cancel()
                 switch direction {
                 case .increment: adjust(by: 1)
                 case .decrement: adjust(by: -1)
@@ -386,10 +394,44 @@ private struct TempoReadout: View {
         DragGesture(minimumDistance: 5, coordinateSpace: .global)
             .updating($dragging) { _, active, _ in active = true }
             .onChanged { value in
-                let step = Int((-value.translation.height / 3).rounded())
+                momentum?.cancel()
+                let height = value.translation.height
+                let distance = abs(height)
+                // Short drags start near 1 BPM per 8 points and gradually approach 1 per 3.
+                let scaled = distance / 3 - 6 * (1 - exp(-distance / 30))
+                let step = Int(scaled.rounded()) * (height < 0 ? 1 : -1)
                 adjust(by: step - lastDragStep)
                 lastDragStep = step
             }
+            .onEnded { value in
+                let remaining = value.translation.height - value.predictedEndTranslation.height
+                coast(projectedDistance: remaining)
+            }
+    }
+
+    private func coast(projectedDistance: CGFloat) {
+        guard !reduceMotion else { return }
+        let start = tempo
+        let extra = Int(min(6, max(-6, projectedDistance / 28)).rounded(.towardZero))
+        let target = min(range.upperBound, max(range.lowerBound, start + extra))
+        guard target != start else { return }
+
+        momentum = Task { @MainActor in
+            let clock = ContinuousClock()
+            let began = clock.now
+            var expected = start
+            // A quadratic ease-out spaces the last few BPM changes farther apart.
+            for frame in 1...12 {
+                do { try await clock.sleep(until: began + .milliseconds(frame * 16)) }
+                catch { return }
+                guard !Task.isCancelled, tempo == expected else { return }
+                let remaining = 1 - Double(frame) / 12
+                let offset = Double(target - start) * (1 - remaining * remaining)
+                let next = start + Int(offset.rounded())
+                if next != expected { tempo = next }
+                expected = next
+            }
+        }
     }
 
     private func adjust(by delta: Int) {
@@ -398,6 +440,7 @@ private struct TempoReadout: View {
     }
 
     private func beginEntry() {
+        momentum?.cancel()
         entry = ""
         editing = true
     }
