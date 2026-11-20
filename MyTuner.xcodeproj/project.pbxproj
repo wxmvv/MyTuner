@@ -98,7 +98,6 @@
 				View/SettingView/ListSettingsView.swift,
 				View/SettingView/SettingValues.swift,
 				View/TunerView.swift,
-				View/TunerView/ArcTunerView/ref.png,
 				View/TunerView/CircleTunerView/CircleTuner.swift,
 				View/TunerView/CircleTunerView/CircleTunerView.swift,
 				ViewModel/InstrumentConductor.swift,
@@ -736,7 +735,7 @@
 				CODE_SIGN_ENTITLEMENTS = Shared/MyTuner.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				"CURRENT_PROJECT_VERSION[sdk=macosx*]" = 4;
+				"CURRENT_PROJECT_VERSION[sdk=macosx*]" = 5;
 				DEVELOPMENT_ASSET_PATHS = "Preview\\ Content";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -774,7 +773,7 @@
 				CODE_SIGN_ENTITLEMENTS = Shared/MyTuner.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				"CURRENT_PROJECT_VERSION[sdk=macosx*]" = 4;
+				"CURRENT_PROJECT_VERSION[sdk=macosx*]" = 5;
 				DEVELOPMENT_ASSET_PATHS = "Preview\\ Content";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
