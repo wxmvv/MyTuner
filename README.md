@@ -1,19 +1,27 @@
 # <img src="https://github.com/wxmvv/MyTuner/raw/main/Images/icon.png" width="60" height="60" align="center" /> MyTuner
 
-A simple chromatic tuner for iOS & macOS. Build with SwiftUI.
+A tuner and metronome for iPhone, iPad, Mac, and Apple Watch. Built with SwiftUI.
 
 | Dark                                | Light                                |
 | ----------------------------------- | ------------------------------------ |
 | ![](https://raw.githubusercontent.com/wxmvv/MyTuner/refs/heads/main/Images/ios-dark-shortcut.png)  | ![](https://raw.githubusercontent.com/wxmvv/MyTuner/refs/heads/main/Images/ios-light-shortcut.png)    |
 
 
-Features:
+## Features
 
-* Beautiful, clean and simple interface
+- Chromatic and instrument tuning with adjustable pitch reference and sensitivity on iPhone, iPad, and Mac.
+- Reference tones for guitar, bass, piano, and marimba.
+- A metronome with custom accents, song presets, and visual beat cues.
 
-* Multiple tuning modes are available.
+## Apple Watch
 
-* Can set various data in detail
+MyTuner runs independently on watchOS 11 or later. Swipe left for the tuner and right for the metronome.
+
+- **Tuner** uses the watch microphone. Once authorized, it starts listening when you open the tuner page.
+- **Metronome** starts and stops when you tap the beat blocks. Tap the time signature to change meter or turn on first-beat haptics.
+- **Tempo** can be adjusted with the plus and minus buttons. To use the Digital Crown, tap BPM and enable **Adjust BPM with Digital Crown**.
+
+To run the Watch app from source, open the Xcode project and select the `MyTuner Watch` scheme.
 
 ## Installation
 
