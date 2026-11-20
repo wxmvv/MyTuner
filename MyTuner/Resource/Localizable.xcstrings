@@ -756,6 +756,16 @@
         }
       }
     },
+    "Privacy Policy" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "隐私政策"
+          }
+        }
+      }
+    },
     "Request microphone permission.." : {
       "localizations" : {
         "zh-Hans" : {

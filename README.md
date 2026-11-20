@@ -1,11 +1,10 @@
-# <img src="https://github.com/wxmvv/MyTuner/raw/main/Images/icon.png" width="60" height="60" align="center" /> MyTuner
+# <img src="Images/icon.png" width="60" height="60" align="center" alt="" /> MyTuner
 
 A tuner and metronome for iPhone, iPad, Mac, and Apple Watch. Built with SwiftUI.
 
-| Dark                                | Light                                |
-| ----------------------------------- | ------------------------------------ |
-| ![](https://raw.githubusercontent.com/wxmvv/MyTuner/refs/heads/main/Images/ios-dark-shortcut.png)  | ![](https://raw.githubusercontent.com/wxmvv/MyTuner/refs/heads/main/Images/ios-light-shortcut.png)    |
-
+| iPhone tuner | iPhone metronome |
+| --- | --- |
+| ![MyTuner chromatic tuner on iPhone in light mode](Screenshots/iphone-tuner.jpg) | ![MyTuner metronome on iPhone in dark mode](Screenshots/iphone-metronome.jpg) |
 
 ## Features
 
@@ -17,6 +16,10 @@ A tuner and metronome for iPhone, iPad, Mac, and Apple Watch. Built with SwiftUI
 
 MyTuner runs independently on watchOS 11 or later. Swipe left for the tuner and right for the metronome.
 
+| Tuner | Metronome |
+| --- | --- |
+| <img src="Screenshots/watch-tuner.png" alt="Pitch and cents reading on Apple Watch" width="208" /> | <img src="Screenshots/watch-metronome.png" alt="Beat blocks and tempo controls on Apple Watch" width="208" /> |
+
 - **Tuner** uses the watch microphone. Once authorized, it starts listening when you open the tuner page.
 - **Metronome** starts and stops when you tap the beat blocks. Tap the time signature to change meter or turn on first-beat haptics.
 - **Tempo** can be adjusted with the plus and minus buttons. To use the Digital Crown, tap BPM and enable **Adjust BPM with Digital Crown**.
@@ -25,7 +28,7 @@ To run the Watch app from source, open the Xcode project and select the `MyTuner
 
 ## Installation
 
-[![Download on the App Store](https://raw.githubusercontent.com/wxmvv/MyTuner/refs/heads/main/Images/appstore.svg)](https://apps.apple.com/app/id6746087511)
+[![Download on the App Store](Images/appstore.svg)](https://apps.apple.com/app/id6746087511)
 
 ## Bugs and feature requests
 

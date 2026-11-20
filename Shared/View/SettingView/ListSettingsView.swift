@@ -251,6 +251,18 @@ struct ListSettingsView: View {
                             
                         }
                         
+                        if let privacyPolicyURL = URL(string: "https://github.com/wxmvv/MyTuner/wiki/Privacy-Policy") {
+                            Link(destination: privacyPolicyURL) {
+                                HStack {
+                                    Text("Privacy Policy")
+                                    Spacer()
+                                    Image(systemName: "hand.raised")
+                                        .foregroundColor(.primary.opacity(0.7))
+                                }
+                                .foregroundColor(.primary)
+                            }
+                        }
+
                         // Leave a Review
                         Button(action: {
                             if let url = URL(string: "https://apps.apple.com/app/id6746087511") {
