@@ -88,6 +88,7 @@
 				Model/TunerAnalysis.swift,
 				Model/TuningMode.swift,
 				View/Components/AudioKitView.swift,
+				View/Components/FoldPanes.swift,
 				View/Components/MatchedNote.swift,
 				View/Components/MinimalTopToolbar.swift,
 				View/Components/TuningModePicker.swift,
@@ -125,6 +126,7 @@
 				Model/TuningMode.swift,
 				View/Components/AmplitudeLimitPicker.swift,
 				View/Components/AudioKitView.swift,
+				View/Components/FoldPanes.swift,
 				View/Components/MatchedNote.swift,
 				View/Components/MinimalTopToolbar.swift,
 				View/Components/NeumorphicButton.swift,
@@ -734,8 +736,8 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = Shared/MyTuner.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				"CURRENT_PROJECT_VERSION[sdk=macosx*]" = 5;
+				CURRENT_PROJECT_VERSION = 2;
+				"CURRENT_PROJECT_VERSION[sdk=macosx*]" = 6;
 				DEVELOPMENT_ASSET_PATHS = "Preview\\ Content";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -744,7 +746,7 @@
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "We use the microphone to analyze sound frequencies and help you tune your instrument accurately.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -772,8 +774,8 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = Shared/MyTuner.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				"CURRENT_PROJECT_VERSION[sdk=macosx*]" = 5;
+				CURRENT_PROJECT_VERSION = 2;
+				"CURRENT_PROJECT_VERSION[sdk=macosx*]" = 6;
 				DEVELOPMENT_ASSET_PATHS = "Preview\\ Content";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -782,7 +784,7 @@
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "We use the microphone to analyze sound frequencies and help you tune your instrument accurately.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -807,7 +809,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "MyTuner Watch/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = MyTuner;
@@ -835,7 +837,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "MyTuner Watch/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = MyTuner;

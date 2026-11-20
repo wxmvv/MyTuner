@@ -74,17 +74,10 @@ struct CircleTunerView: View {
     }
 
     private var tunerPage: some View {
-        ZStack {
-            Color.white.opacity(0)
-                .edgesIgnoringSafeArea(.all)
-            CircleTuner(tunerData: conductor.data)
-                .ignoresSafeArea()
-
+        CircleTuner(tunerData: conductor.data)
+        .safeAreaInset(edge: .bottom, spacing: 0) {
             if tuningMode == .instrument {
-                VStack(spacing: 0) {
-                    Spacer()
-                    MinimalInstrumentView(instrumentConductor: instrumentConductor, conductor: conductor)
-                }
+                MinimalInstrumentView(instrumentConductor: instrumentConductor, conductor: conductor)
             }
         }
         .onAppear {

@@ -4,13 +4,14 @@ A tuner and metronome for iPhone, iPad, Mac, and Apple Watch. Built with SwiftUI
 
 | iPhone tuner | iPhone metronome |
 | --- | --- |
-| ![MyTuner chromatic tuner on iPhone in light mode](Screenshots/iphone-tuner.jpg) | ![MyTuner metronome on iPhone in dark mode](Screenshots/iphone-metronome.jpg) |
+| <img src="Screenshots/iphone-tuner.jpg" alt="iPhone chromatic tuner in portrait, light mode" width="240" /> | <img src="Screenshots/iphone-metronome.jpg" alt="iPhone metronome in portrait, dark mode" width="240" /> |
 
 ## Features
 
 - Chromatic and instrument tuning with adjustable pitch reference and sensitivity on iPhone, iPad, and Mac.
 - Reference tones for guitar, bass, piano, and marimba.
 - A metronome with custom accents, song presets, and visual beat cues.
+- Portrait and landscape on iPhone, with layouts that adapt to the displays and fold of iPhone Duo.
 
 ## Apple Watch
 

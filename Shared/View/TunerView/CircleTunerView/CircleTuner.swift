@@ -13,42 +13,77 @@ struct CircleTuner: View {
     
     var body: some View {
         GeometryReader { geo in
-            ZStack(alignment: .center) {
-                Circle() // 背景
-                    .fill(Color(uiColor: .systemGray5).opacity(0.5))
-                    .frame(width: 180,height: 180)
-                Circle() // 指针
-                    .fill(getColor(cents: tunerData.cents).opacity(0.9))
-                    .frame(width: 180,height: 180)
-                    .offset(x: CGFloat(getOffsetX()) * geo.size.width/100,y: 0)
-                    .animation(.easeInOut, value: tunerData.cents)
-                // ArrowMark right
-                Image(systemName: "arrowtriangle.left.fill")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 18, height: 18)
-                    .foregroundColor(Color.primary.opacity(getOffsetX() == 50 ? 0.9 : 0))
-                    .offset(x: geo.size.width/2 - 20, y: 0)
-                    .animation(.easeInOut, value: getOffsetX())
-                // ArrowMark left
-                Image(systemName: "arrowtriangle.right.fill")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 18, height: 18)
-                    .foregroundColor(Color.primary.opacity(getOffsetX() == -50 ? 0.9 : 0))
-                    .offset(x: -geo.size.width/2 + 20, y: 0)
-                    .animation(.easeInOut, value: getOffsetX())
-                MatchedNote(note: tunerData.targetNote)
-                    .frame(width: 180,height: 180)
-                    .transaction { $0.animation = nil }
+            if let panes = FoldPanes(geo) {
+                let horizontal = panes.axis == .horizontal
+                let layout = horizontal
+                    ? AnyLayout(HStackLayout(spacing: panes.spacing))
+                    : AnyLayout(VStackLayout(spacing: panes.spacing))
+                let useBefore = horizontal
+                    ? panes.before.width >= panes.after.width
+                    : panes.before.height >= min(180, panes.after.height)
+
+                layout {
+                    pane(size: panes.before, showsDial: useBefore)
+                    pane(size: panes.after, showsDial: !useBefore)
+                }
+            } else {
+                dial(size: geo.size)
             }
-            .frame(width: geo.size.width, height: geo.size.height)
-            .shadow(color: getOffsetX()==0 ? getColor(cents:tunerData.cents).opacity(1): Color.clear, radius: getOffsetX()==0 ? 100 : 0, x: 0, y: 0)
-            .shadow(color: getOffsetX()==0 ? getColor(cents:tunerData.cents).opacity(1): Color.clear, radius: getOffsetX()==0 ? 160 : 0, x: 0, y: 0)
         }
     }
+
+    @ViewBuilder
+    private func pane(size: CGSize, showsDial: Bool) -> some View {
+        if showsDial {
+            dial(size: size).clipped()
+        } else {
+            Color.clear.frame(width: size.width, height: size.height)
+        }
+    }
+
+    private func dial(size: CGSize) -> some View {
+        let diameter = min(180, size.width, size.height)
+        let travel = max(0, (size.width - diameter) / 2 - 12)
+        let arrowOffset = max(0, size.width / 2 - 20)
+        let offset = getOffsetX()
+        let color = getColor(cents: tunerData.cents)
+        let glow = offset == 0 ? color : Color.clear
+
+        return ZStack(alignment: .center) {
+            Circle() // 背景
+                .fill(Color(uiColor: .systemGray5).opacity(0.5))
+                .frame(width: diameter, height: diameter)
+            Circle() // 指针
+                .fill(color.opacity(0.9))
+                .frame(width: diameter, height: diameter)
+                .offset(x: CGFloat(offset / 50) * travel)
+                .animation(.easeInOut, value: tunerData.cents)
+            Image(systemName: "arrowtriangle.left.fill")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 18, height: 18)
+                .foregroundColor(Color.primary.opacity(offset == 50 ? 0.9 : 0))
+                .offset(x: arrowOffset)
+                .animation(.easeInOut, value: offset)
+            Image(systemName: "arrowtriangle.right.fill")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 18, height: 18)
+                .foregroundColor(Color.primary.opacity(offset == -50 ? 0.9 : 0))
+                .offset(x: -arrowOffset)
+                .animation(.easeInOut, value: offset)
+            MatchedNote(note: tunerData.targetNote)
+                .scaleEffect(diameter / 180)
+                .frame(width: diameter, height: diameter)
+                .transaction { $0.animation = nil }
+        }
+        .frame(width: size.width, height: size.height)
+        .shadow(color: glow, radius: offset == 0 ? 100 : 0)
+        .shadow(color: glow, radius: offset == 0 ? 160 : 0)
+    }
+
     private func getOffsetX()->Float{
-        abs(tunerData.cents) > Float(inTuneRange) ? abs(tunerData.cents) > 50 ? 50 : tunerData.cents  : 0
+        abs(tunerData.cents) > Float(inTuneRange) ? min(50, max(-50, tunerData.cents)) : 0
     }
     private func getColor(cents: Float)->Color{
         // Color(red: 1, green: 1, blue: 0 ,opacity: 1) // 黄

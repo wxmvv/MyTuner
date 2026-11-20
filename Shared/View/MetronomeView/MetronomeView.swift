@@ -32,7 +32,9 @@ struct MetronomeView: View {
             let size = geometry.size
             let landscape = size.width > size.height && size.width >= 540
             let compact = size.height < (landscape ? 420 : 630)
-            if landscape {
+            if let panes = FoldPanes(geometry) {
+                foldedPractice(panes)
+            } else if landscape {
                 let columnGap: CGFloat = compact ? 28 : 48
                 let width = min(size.width - 40, 960)
                 let rhythmWidth = (width - columnGap) * 0.55
@@ -53,14 +55,25 @@ struct MetronomeView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             } else {
                 let width = max(0, min(size.width - 40, 490))
-                VStack(spacing: 0) {
-                    Spacer(minLength: 0)
-                    rhythmPanel(width: width, compact: compact)
-                    Spacer(minLength: compact ? 10 : 32)
-                    practiceControls(compact: compact)
+                ViewThatFits(in: .vertical) {
+                    VStack(spacing: 0) {
+                        Spacer(minLength: 0)
+                        rhythmPanel(width: width, compact: compact)
+                        Spacer(minLength: compact ? 10 : 32)
+                        practiceControls(compact: compact)
+                    }
+                    .padding(.vertical, compact ? 8 : 16)
+
+                    ScrollView {
+                        VStack(spacing: 10) {
+                            rhythmPanel(width: width, compact: true)
+                            practiceControls(compact: true)
+                        }
+                        .padding(.vertical, 8)
+                    }
+                    .scrollBounceBehavior(.basedOnSize)
                 }
                 .frame(width: width)
-                .padding(.vertical, compact ? 8 : 16)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
         }
@@ -131,6 +144,33 @@ struct MetronomeView: View {
         case .firstBeat: return metronome.currentBeat == 1 ? .green : nil
         case .accent: return accent == .accent ? accent.color(in: colorScheme) : nil
         }
+    }
+
+    private func foldedPractice(_ panes: FoldPanes) -> some View {
+        let layout = panes.axis == .horizontal
+            ? AnyLayout(HStackLayout(spacing: panes.spacing))
+            : AnyLayout(VStackLayout(spacing: panes.spacing))
+        let compact = min(panes.before.height, panes.after.height) < 420
+        return layout {
+            foldPane(size: panes.before) { width in
+                rhythmPanel(width: width, compact: compact)
+            }
+            foldPane(size: panes.after) { _ in
+                practiceControls(compact: compact)
+            }
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+
+    private func foldPane<Content: View>(size: CGSize, @ViewBuilder content: (CGFloat) -> Content) -> some View {
+        let width = max(0, min(size.width - 32, 490))
+        return ViewThatFits(in: .vertical) {
+            content(width)
+            ScrollView { content(width) }
+                .scrollBounceBehavior(.basedOnSize)
+        }
+        .frame(width: width)
+        .frame(width: size.width, height: size.height)
     }
 
     private func rhythmPanel(width: CGFloat, compact: Bool) -> some View {

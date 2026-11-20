@@ -18,32 +18,69 @@ struct MinimalInstrumentView: View {
     var dev = false
     
     var body: some View {
-        GeometryReader { geo in
-            HStack(spacing: 0) {
-                ForEach(instrument.notes(referenceFrequency: Float(pitchStandard))) { note in
-                    Button {
-                        instrumentConductor.playNote(note: MIDINoteNumber(note.midi), pitchStandard: pitchStandard)
-                    } label :{
-                        noteButtonLabel(note.noteNameString, isSelected: dev || conductor.data.targetMidi == note.midi)
-                            .padding(.horizontal, 6)
-                            .padding(.vertical)
+        GeometryReader { geometry in
+            let notes = instrument.notes(referenceFrequency: Float(pitchStandard))
+            if let panes = FoldPanes(geometry) {
+                if panes.axis == .horizontal {
+                    let split = (notes.count + 1) / 2
+                    HStack(spacing: panes.spacing) {
+                        noteStrip(Array(notes.prefix(split)))
+                            .frame(width: panes.before.width, height: panes.before.height)
+                            .clipped()
+                        noteStrip(Array(notes.dropFirst(split)))
+                            .frame(width: panes.after.width, height: panes.after.height)
+                            .clipped()
                     }
-                    .buttonStyle(.plain)
+                } else {
+                    let useAfter = panes.after.height >= panes.before.height
+                    let height = useAfter ? panes.after.height : panes.before.height
+                    noteStrip(notes, diameter: min(50, height))
+                        .frame(height: height)
+                        .clipped()
+                        .offset(y: useAfter ? panes.before.height + panes.spacing : 0)
                 }
-                
+            } else {
+                noteStrip(notes)
+                    .frame(height: geometry.size.height)
             }
-            .frame(width: geo.size.width, height: 80)
-//            .background(.yellow)
         }
         .frame(height: 80)
-//        .background(.red)
     }
+
+    private func noteStrip(_ notes: [Note], diameter: CGFloat = 50) -> some View {
+        ViewThatFits(in: .horizontal) {
+            noteButtons(notes, diameter: diameter, spacing: 12).padding(.horizontal, 6)
+            noteButtons(notes, diameter: diameter, spacing: 0)
+            ScrollView(.horizontal) {
+                noteButtons(notes, diameter: diameter, spacing: 6).padding(.horizontal, 6)
+            }
+            .scrollBounceBehavior(.basedOnSize)
+        }
+        .frame(maxWidth: .infinity)
+    }
+
+    private func noteButtons(_ notes: [Note], diameter: CGFloat, spacing: CGFloat) -> some View {
+        HStack(spacing: spacing) {
+            ForEach(notes) { note in
+                Button {
+                    instrumentConductor.playNote(note: MIDINoteNumber(note.midi), pitchStandard: pitchStandard)
+                } label: {
+                    noteButtonLabel(note.noteNameString, diameter: diameter,
+                                    isSelected: dev || conductor.data.targetMidi == note.midi)
+                }
+                .buttonStyle(.plain)
+            }
+        }
+    }
+
     @ViewBuilder
-    private func noteButtonLabel(_ title: String, isSelected: Bool) -> some View {
+    private func noteButtonLabel(_ title: String, diameter: CGFloat, isSelected: Bool) -> some View {
         let label = Text(title)
             .foregroundColor(.primary)
             .font(.title2.weight(.bold))
-            .frame(width: 50, height: 50)
+            .lineLimit(1)
+            .minimumScaleFactor(0.6)
+            .frame(width: diameter, height: diameter)
             .contentShape(Circle())
 
         if #available(iOS 26.0, *) {
