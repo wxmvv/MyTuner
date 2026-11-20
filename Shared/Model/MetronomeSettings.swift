@@ -1,5 +1,12 @@
 import Foundation
 
+enum ScreenFlashMode: String {
+    case off, firstBeat, accent
+
+    static let storageKey = "metronomeScreenFlashMode"
+    static let legacyDefault: Self = UserDefaults.standard.bool(forKey: "metronomeScreenFlash") ? .firstBeat : .off
+}
+
 enum BeatAccent: String, Codable, CaseIterable {
     case normal, muted, accent, secondary
 

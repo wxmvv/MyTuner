@@ -21,16 +21,6 @@
         }
       }
     },
-    "%lld / %lld" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$lld / %2$lld"
-          }
-        }
-      }
-    },
     "%lld BPM" : {
       "localizations" : {
         "zh-Hans" : {
@@ -41,7 +31,18 @@
         }
       }
     },
+    "© 2025 wxmvv.dev" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "© 2025 wxmvv.dev"
+          }
+        }
+      }
+    },
     "12 String Guitar" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -62,11 +63,22 @@
       }
     },
     "Accent" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "重音"
+          }
+        }
+      }
+    },
+    "Accent only" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "仅重音拍"
           }
         }
       }
@@ -82,6 +94,7 @@
       }
     },
     "Acoustic Guitars" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -162,6 +175,7 @@
       }
     },
     "Bell" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -202,6 +216,7 @@
       }
     },
     "Chorus Guitar" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -234,6 +249,7 @@
       }
     },
     "Click" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -294,6 +310,7 @@
       }
     },
     "Current beat" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -334,6 +351,7 @@
       }
     },
     "Display" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -354,6 +372,7 @@
       }
     },
     "Dry Guitar" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -413,22 +432,22 @@
         }
       }
     },
-    "Flash the full screen" : {
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "全屏随拍闪烁"
-          }
-        }
-      }
-    },
     "Flats" : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "♭"
+          }
+        }
+      }
+    },
+    "Full-screen flash" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "全屏闪烁"
           }
         }
       }
@@ -543,6 +562,16 @@
         }
       }
     },
+    "Metronome display" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "节拍器显示"
+          }
+        }
+      }
+    },
     "Microphone permission Denied，Please grant permissions in the settings interface." : {
       "localizations" : {
         "zh-Hans" : {
@@ -563,17 +592,8 @@
         }
       }
     },
-    "Metronome display" : {
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "节拍器显示"
-          }
-        }
-      }
-    },
     "Mute" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -614,11 +634,22 @@
       }
     },
     "Octave Pad" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "八音盒"
+          }
+        }
+      }
+    },
+    "Off" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "关闭"
           }
         }
       }
@@ -654,6 +685,7 @@
       }
     },
     "Piano_Z-Doc Soundfont II" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -684,6 +716,7 @@
       }
     },
     "Practice settings" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -784,6 +817,7 @@
       }
     },
     "Secondary accent" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -813,6 +847,16 @@
         }
       }
     },
+    "Show beat count" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "显示拍子计数"
+          }
+        }
+      }
+    },
     "Slow" : {
       "localizations" : {
         "zh-Hans" : {
@@ -824,21 +868,12 @@
       }
     },
     "Soft Guitar" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "软吉他"
-          }
-        }
-      }
-    },
-    "Show beat count" : {
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "显示拍子计数"
           }
         }
       }
@@ -879,6 +914,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "开始"
+          }
+        }
+      }
+    },
+    "Start of each measure" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "每小节首拍"
           }
         }
       }
@@ -924,6 +969,7 @@
       }
     },
     "Time signature" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -1024,6 +1070,7 @@
       }
     },
     "Warm Chorus" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -1034,6 +1081,7 @@
       }
     },
     "Warm Guitar" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -1044,6 +1092,7 @@
       }
     },
     "Wet Guitar" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -1054,21 +1103,12 @@
       }
     },
     "Wood" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "木鱼"
-          }
-        }
-      }
-    },
-    "© 2025 wxmvv.dev" : {
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "© 2025 wxmvv.dev"
           }
         }
       }

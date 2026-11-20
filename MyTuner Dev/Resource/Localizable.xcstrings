@@ -62,6 +62,16 @@
         }
       }
     },
+    "Accent only" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "仅重音拍"
+          }
+        }
+      }
+    },
     "Acoustic" : {
 
     },
@@ -345,16 +355,6 @@
         }
       }
     },
-    "Flash the full screen" : {
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "全屏随拍闪烁"
-          }
-        }
-      }
-    },
     "Float: %0.2f" : {
 
     },
@@ -366,6 +366,16 @@
     },
     "frequencyDistance Int: %0.0f" : {
 
+    },
+    "Full-screen flash" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "全屏闪烁"
+          }
+        }
+      }
     },
     "Guitar" : {
       "localizations" : {
@@ -552,6 +562,16 @@
         }
       }
     },
+    "Off" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "关闭"
+          }
+        }
+      }
+    },
     "OK" : {
       "localizations" : {
         "zh-Hans" : {
@@ -734,6 +754,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "开始"
+          }
+        }
+      }
+    },
+    "Start of each measure" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "每小节首拍"
           }
         }
       }

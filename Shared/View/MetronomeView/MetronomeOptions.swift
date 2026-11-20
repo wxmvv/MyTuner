@@ -2,14 +2,19 @@ import SwiftUI
 
 struct MetronomeDisplaySettings: View {
     @AppStorage("metronomeCircleFlash") private var circleFlash = true
-    @AppStorage("metronomeScreenFlash") private var screenFlash = false
+    @AppStorage(ScreenFlashMode.storageKey) private var screenFlashMode = ScreenFlashMode.legacyDefault
     @AppStorage("metronomeKeepAwake") private var keepAwake = false
     @AppStorage("metronomeShowBeatCount") private var showBeatCount = false
 
     var body: some View {
         Section("Metronome display") {
             Toggle("Flash beat circles", isOn: $circleFlash)
-            Toggle("Flash the full screen", isOn: $screenFlash)
+            Picker("Full-screen flash", selection: $screenFlashMode) {
+                Text("Off").tag(ScreenFlashMode.off)
+                Text("Start of each measure").tag(ScreenFlashMode.firstBeat)
+                Text("Accent only").tag(ScreenFlashMode.accent)
+            }
+            .pickerStyle(.menu)
             Toggle("Keep screen awake", isOn: $keepAwake)
             Toggle("Show beat count", isOn: $showBeatCount)
         }

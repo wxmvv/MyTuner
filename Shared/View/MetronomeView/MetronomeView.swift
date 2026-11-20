@@ -8,7 +8,7 @@ struct MetronomeView: View {
     @StateObject private var metronome = MetronomePlayer()
     @StateObject private var presets = MetronomePresetLibrary()
     @AppStorage("metronomeCircleFlash") private var circleFlash = true
-    @AppStorage("metronomeScreenFlash") private var screenFlash = false
+    @AppStorage(ScreenFlashMode.storageKey) private var screenFlashMode = ScreenFlashMode.legacyDefault
     @AppStorage("metronomeKeepAwake") private var keepAwake = false
     @AppStorage("metronomeShowBeatCount") private var showBeatCount = false
     @State private var originalIdleSetting: Bool?
@@ -27,10 +27,6 @@ struct MetronomeView: View {
         var id: Self { self }
     }
 
-    private var ink: Color {
-        colorScheme == .dark ? Color(red: 0.56, green: 0.91, blue: 0.77) : Color(red: 0.06, green: 0.39, blue: 0.29)
-    }
-
     var body: some View {
         GeometryReader { geometry in
             let size = geometry.size
@@ -41,9 +37,17 @@ struct MetronomeView: View {
                 let width = min(size.width - 40, 960)
                 let rhythmWidth = (width - columnGap) * 0.55
                 HStack(spacing: columnGap) {
-                    rhythmPanel(width: rhythmWidth, compact: compact)
+                    beatDisplay(width: rhythmWidth, gap: compact ? 6 : 10)
                         .frame(width: rhythmWidth)
-                    practiceControls
+                        .overlay(alignment: .top) {
+                            songHeading(lines: compact ? 1 : 2)
+                                .padding(.bottom, compact ? 6 : 16)
+                                .alignmentGuide(.top) { $0[.bottom] }
+                        }
+                    ViewThatFits(in: .vertical) {
+                        practiceControls(compact: compact)
+                        ScrollView { practiceControls(compact: compact) }
+                    }
                 }
                 .frame(width: width)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -53,7 +57,7 @@ struct MetronomeView: View {
                     Spacer(minLength: 0)
                     rhythmPanel(width: width, compact: compact)
                     Spacer(minLength: compact ? 10 : 32)
-                    practiceControls
+                    practiceControls(compact: compact)
                 }
                 .frame(width: width)
                 .padding(.vertical, compact ? 8 : 16)
@@ -63,18 +67,18 @@ struct MetronomeView: View {
         .background {
             ZStack {
                 Color(uiColor: .systemBackground)
-                RadialGradient(colors: [ink.opacity(0.12), .clear], center: .center,
-                               startRadius: 0, endRadius: 390)
-                if screenFlash && metronome.isFlashing {
-                    ink.opacity(colorScheme == .dark ? 0.22 : 0.16)
+                if let flashColor {
+                    flashColor.opacity(colorScheme == .dark ? 0.42 : 0.50)
                 }
             }
             .ignoresSafeArea()
         }
         .navigationBarTitleDisplayMode(.inline)
+        .toolbarBackground(.hidden, for: .navigationBar)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 presetMenu
+                    .accessibilityValue(Text(verbatim: presets.currentName(for: metronome.settings) ?? ""))
             }
         }
         .sheet(item: $sheet) { item in
@@ -114,19 +118,26 @@ struct MetronomeView: View {
         }
     }
 
-    private func rhythmPanel(width: CGFloat, compact: Bool) -> some View {
-        VStack(spacing: compact ? 6 : 16) {
-            songHeading(lines: compact ? 1 : 2)
-            VStack(spacing: compact ? 10 : 24) {
-                beatDisplay(width: width, gap: compact ? 6 : 10)
-                tempoControl(compact: compact)
-            }
+    private var flashColor: Color? {
+        guard let accent = metronome.flashingAccent else { return nil }
+        switch screenFlashMode {
+        case .off: return nil
+        case .firstBeat: return metronome.currentBeat == 1 ? .green : nil
+        case .accent: return accent == .accent ? accent.color(in: colorScheme) : nil
         }
     }
 
-    private var practiceControls: some View {
-        VStack(spacing: 12) {
+    private func rhythmPanel(width: CGFloat, compact: Bool) -> some View {
+        VStack(spacing: compact ? 6 : 16) {
+            songHeading(lines: compact ? 1 : 2)
+            beatDisplay(width: width, gap: compact ? 6 : 10)
+        }
+    }
+
+    private func practiceControls(compact: Bool) -> some View {
+        VStack(spacing: compact ? 8 : 12) {
             if showBeatCount { PracticeRecordView(metronome: metronome) }
+            tempoControl(compact: compact)
             quickControls
             playbackButton
             if let message = metronome.errorMessage {
@@ -137,7 +148,7 @@ struct MetronomeView: View {
 
     private func songHeading(lines: Int) -> some View {
         let name = presets.currentName(for: metronome.settings)
-        // Size the space above BPM independently of the song, including at larger text sizes.
+        // Reserve a stable heading height above the beat lights, including at larger text sizes.
         return Text(verbatim: " ")
             .font(.headline)
             .lineLimit(lines, reservesSpace: true)
@@ -158,20 +169,65 @@ struct MetronomeView: View {
             .animation(reduceMotion ? nil : .easeInOut(duration: 0.22), value: name)
     }
 
+    @ViewBuilder
     private var presetMenu: some View {
-        Button { showingPresetMenu = true } label: {
-            Label("Song presets", systemImage: "music.note.list")
-                .labelStyle(.iconOnly)
+        if usesSystemPresetMenu {
+            Menu {
+                ForEach(presets.presets) { preset in
+                    Button {
+                        selectPreset(preset)
+                    } label: {
+                        if isCurrentPreset(preset) {
+                            Label { Text(verbatim: preset.name) } icon: { Image(systemName: "checkmark") }
+                        } else {
+                            Text(verbatim: preset.name)
+                        }
+                    }
+                }
+                if !presets.presets.isEmpty { Divider() }
+                Button {
+                    performPresetAction(.save)
+                } label: {
+                    Label("Save song", systemImage: "plus")
+                }
+                Button {
+                    performPresetAction(.manage)
+                } label: {
+                    Label("Manage", systemImage: "music.note.list")
+                }
+            } label: {
+                presetMenuLabel
+            }
+            .menuOrder(.fixed)
+        } else {
+            presetPopover
         }
-        .accessibilityValue(Text(verbatim: presets.currentName(for: metronome.settings) ?? ""))
+    }
+
+    private var usesSystemPresetMenu: Bool {
+        #if targetEnvironment(macCatalyst)
+        true
+        #else
+        ProcessInfo.processInfo.isiOSAppOnMac
+        #endif
+    }
+
+    private var presetMenuLabel: some View {
+        Label("Song presets", systemImage: "music.note.list")
+            .labelStyle(.iconOnly)
+    }
+
+    private var presetPopover: some View {
+        Button { showingPresetMenu = true } label: {
+            presetMenuLabel
+        }
         .popover(isPresented: $showingPresetMenu, attachmentAnchor: .rect(.bounds), arrowEdge: .top) {
             ScrollView {
                 LazyVStack(alignment: .leading, spacing: 0) {
                     ForEach(presets.presets) { preset in
-                        let selected = presets.selectedID == preset.id && metronome.settings == preset.settings
+                        let selected = isCurrentPreset(preset)
                         Button {
-                            presets.select(preset)
-                            metronome.settings = preset.settings
+                            selectPreset(preset)
                             showingPresetMenu = false
                         } label: {
                             HStack {
@@ -197,17 +253,29 @@ struct MetronomeView: View {
             .presentationCompactAdaptation(.popover)
             .presentationBackground(Material.regular)
             .onDisappear {
-                switch nextPresetAction {
-                case .save:
-                    songName = ""
-                    savingSong = true
-                case .manage:
-                    sheet = .presets
-                case nil:
-                    break
-                }
+                guard let action = nextPresetAction else { return }
                 nextPresetAction = nil
+                performPresetAction(action)
             }
+        }
+    }
+
+    private func isCurrentPreset(_ preset: MetronomePreset) -> Bool {
+        presets.selectedID == preset.id && metronome.settings == preset.settings
+    }
+
+    private func selectPreset(_ preset: MetronomePreset) {
+        presets.select(preset)
+        metronome.settings = preset.settings
+    }
+
+    private func performPresetAction(_ action: PresetAction) {
+        switch action {
+        case .save:
+            songName = ""
+            savingSong = true
+        case .manage:
+            sheet = .presets
         }
     }
 
@@ -235,23 +303,26 @@ struct MetronomeView: View {
     }
 
     private func tempoControl(compact: Bool) -> some View {
-        VStack(spacing: 4) {
-            HStack(spacing: 4) {
-                Text("BPM").tracking(2)
-                Image(systemName: "arrow.up.arrow.down").imageScale(.small)
+        HStack(spacing: 8) {
+            tempoButton(-1)
+            VStack(spacing: 0) {
+                HStack(spacing: 4) {
+                    Text("BPM").tracking(1)
+                    Image(systemName: "arrow.up.arrow.down").imageScale(.small)
+                }
+                .font(.caption.weight(.semibold))
+                .foregroundStyle(.secondary)
+                .accessibilityHidden(true)
+                TempoReadout(tempo: $metronome.settings.tempo, fontSize: compact ? 42 : 54)
+                Text(verbatim: metronome.settings.tempoTerm)
+                    .font(.system(.subheadline, design: .serif).italic())
+                    .foregroundStyle(.secondary)
             }
-            .font(.caption.weight(.semibold))
-            .foregroundStyle(.secondary)
-            .accessibilityHidden(true)
-            HStack {
-                tempoButton(-1)
-                TempoReadout(tempo: $metronome.settings.tempo, ink: ink, fontSize: compact ? 68 : 88)
-                tempoButton(1)
-            }
-            Text(verbatim: metronome.settings.tempoTerm)
-                .font(.system(.title3, design: .serif).italic()).foregroundStyle(ink)
+            tempoButton(1)
         }
-        .padding(.horizontal, 8)
+        .padding(.horizontal, 15)
+        .padding(.vertical, compact ? 4 : 8)
+        .practiceGlass(in: RoundedRectangle(cornerRadius: 20, style: .continuous))
     }
 
     private func tempoButton(_ delta: Int) -> some View {
@@ -271,7 +342,7 @@ struct MetronomeView: View {
 
     private func beatDisplay(width: CGFloat, gap: CGFloat) -> some View {
         let count = metronome.settings.numerator
-        let capacity = max(1, Int((width + gap) / (BeatCircle.diameter + gap)))
+        let capacity = max(1, Int((width + gap) / (BeatLight.hitSize + gap)))
         let rows = (count + capacity - 1) / capacity
         let columns = (count + rows - 1) / rows
         return VStack(spacing: gap) {
@@ -279,11 +350,11 @@ struct MetronomeView: View {
                 HStack(spacing: gap) {
                     ForEach((row * columns)..<min(count, (row + 1) * columns), id: \.self) { index in
                         let accent = metronome.settings.beats[index]
-                        let lit = circleFlash && metronome.currentBeat == index + 1 && metronome.isFlashing
+                        let pulse = circleFlash && metronome.currentBeat == index + 1 ? metronome.flashingAccent : nil
                         Button {
                             metronome.settings.beats[index] = accent.next
                         } label: {
-                            BeatCircle(accent: accent, lit: lit, ink: ink)
+                            BeatLight(accent: pulse ?? accent, lit: pulse != nil)
                         }
                         .buttonStyle(.plain)
                         .accessibilityLabel("Beat \(index + 1)")
@@ -337,7 +408,7 @@ struct MetronomeView: View {
             .font(.headline)
             .foregroundStyle(colorScheme == .dark ? .black : .white)
             .frame(maxWidth: .infinity, minHeight: 54)
-            .background(ink, in: Capsule())
+            .background(Color.primary, in: Capsule())
         }
         .buttonStyle(.plain)
     }
@@ -361,7 +432,6 @@ struct MetronomeView: View {
 
 private struct TempoReadout: View {
     @Binding var tempo: Int
-    let ink: Color
     let fontSize: CGFloat
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.scenePhase) private var scenePhase
@@ -375,11 +445,11 @@ private struct TempoReadout: View {
 
     var body: some View {
         Text(verbatim: String(tempo))
-            .font(.system(size: fontSize, weight: .light, design: .rounded))
+            .font(.system(size: fontSize, weight: .semibold, design: .rounded))
             .monospacedDigit().lineLimit(1).minimumScaleFactor(0.5)
             .frame(maxWidth: .infinity)
             .contentShape(Rectangle())
-            .foregroundStyle(dragging ? ink : .primary)
+            .foregroundStyle(Color.primary.opacity(dragging ? 0.75 : 1))
             .highPriorityGesture(drag.exclusively(before: TapGesture().onEnded { beginEntry() }))
             .onChange(of: dragging) { active in
                 if !active { lastDragStep = 0 }
@@ -468,30 +538,45 @@ private struct TempoReadout: View {
     }
 }
 
-private struct BeatCircle: View {
-    static let diameter: CGFloat = 46
-    var accent: BeatAccent
-    var lit: Bool
-    var ink: Color
+private extension BeatAccent {
+    var lightDiameter: CGFloat {
+        switch self {
+        case .accent: return 32
+        case .secondary: return 26
+        case .normal: return 20
+        case .muted: return 14
+        }
+    }
+
+    func color(in colorScheme: ColorScheme) -> Color {
+        // The circle tuner spans hues from 15° (red-orange) to 80° (lime).
+        let hue: Double
+        switch self {
+        case .accent: hue = 15
+        case .secondary: hue = 48
+        case .normal: hue = 80
+        case .muted: return Color(uiColor: .systemGray)
+        }
+        return Color(hue: hue / 360, saturation: 0.97, brightness: colorScheme == .dark ? 1 : 0.83)
+    }
+}
+
+private struct BeatLight: View {
+    static let hitSize: CGFloat = 46
+    let accent: BeatAccent
+    let lit: Bool
+    @Environment(\.colorScheme) private var colorScheme
 
     var body: some View {
-        ZStack {
-            Circle().fill(lit ? ink : ink.opacity(accent == .muted ? 0 : 0.13))
-            Circle().strokeBorder(ink.opacity(lit ? 1 : 0.55),
-                                  style: StrokeStyle(lineWidth: lit ? 3 : 1.4, dash: accent == .muted ? [3, 3] : []))
-            Group {
-                switch accent {
-                case .normal: Circle().frame(width: 7, height: 7)
-                case .muted: Image(systemName: "minus")
-                case .accent: Image(systemName: "chevron.up")
-                case .secondary: Image(systemName: "chevron.right")
-                }
-            }
-            .font(.headline.bold())
-            .foregroundStyle(lit ? Color(uiColor: .systemBackground) : ink)
-        }
-        .frame(width: Self.diameter, height: Self.diameter)
-        .shadow(color: lit ? ink.opacity(0.38) : .clear, radius: 6)
+        let color = accent.color(in: colorScheme)
+        return Circle()
+            .fill(color.opacity(lit ? 1 : 0.94))
+            .frame(width: accent.lightDiameter, height: accent.lightDiameter)
+            .scaleEffect(lit ? 1.18 : 1)
+            .shadow(color: color.opacity(lit ? 0.95 : (accent == .muted ? 0 : 0.65)), radius: lit ? 9 : 5)
+            .shadow(color: color.opacity(lit ? 0.65 : (accent == .muted ? 0 : 0.32)), radius: lit ? 16 : 10)
+            .frame(width: Self.hitSize, height: Self.hitSize)
+            .contentShape(Rectangle())
     }
 }
 

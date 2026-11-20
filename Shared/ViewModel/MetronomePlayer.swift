@@ -2,6 +2,9 @@ import AVFoundation
 import Combine
 import os
 
+// The click bank for each sound uses these four levels, from silent to strongest.
+private let accentsByClickLevel: [BeatAccent] = [.muted, .normal, .secondary, .accent]
+
 /// Only fixed-size values cross the audio thread boundary. The render callback
 /// can always finish the current block if the UI is busy editing the settings.
 private struct Rhythm {
@@ -21,24 +24,19 @@ private struct Rhythm {
         case .bell: soundOffset = 8
         }
         accents = settings.beats.enumerated().reduce(0) { packed, beat in
-            let value: UInt32
-            switch beat.element {
-            case .muted: value = 0
-            case .normal: value = 1
-            case .secondary: value = 2
-            case .accent: value = 3
-            }
+            let value = UInt32(accentsByClickLevel.firstIndex(of: beat.element)!)
             return packed | (value << (2 * beat.offset))
         }
     }
 
-    func clickIndex(at beat: Int) -> Int {
-        soundOffset + Int((accents >> (2 * beat)) & 3)
+    func clickLevel(at beat: Int) -> Int {
+        Int((accents >> (2 * beat)) & 3)
     }
 }
 
 private struct Playhead {
     var beat = 0
+    var clickLevel = 0
     var flashing = false
     var beats = 0
     var measures = 0
@@ -84,7 +82,8 @@ private final class ClickTrack {
                 if head.beat == rhythm.numerator { head.measures += 1 }
                 head.beat = meterChanged ? 1 : head.beat % pending.numerator + 1
                 rhythm = pending
-                clickIndex = rhythm.clickIndex(at: head.beat - 1)
+                head.clickLevel = rhythm.clickLevel(at: head.beat - 1)
+                clickIndex = rhythm.soundOffset + head.clickLevel
                 head.beats += 1
                 beatStart = frame
                 nextBeatFrame += Self.sampleRate * 60 / Double(rhythm.tempo)
@@ -143,7 +142,7 @@ final class MetronomePlayer: ObservableObject {
     }
     @Published private(set) var isPlaying = false
     @Published private(set) var currentBeat = 0
-    @Published private(set) var isFlashing = false
+    @Published private(set) var flashingAccent: BeatAccent?
     @Published private(set) var totalBeats: Int
     @Published private(set) var totalMeasures: Int
     @Published private(set) var errorMessage: String?
@@ -168,8 +167,9 @@ final class MetronomePlayer: ObservableObject {
         let track = ClickTrack(settings: settings)
         let format = AVAudioFormat(standardFormatWithSampleRate: ClickTrack.sampleRate, channels: 1)!
         let source = AVAudioSourceNode(format: format) { _, _, frameCount, output in
-            let buffers = UnsafeMutableAudioBufferListPointer(output)
-            guard let samples = buffers.first?.mData?.assumingMemoryBound(to: Float.self) else { return noErr }
+            guard output.pointee.mNumberBuffers > 0,
+                  let samples = output.pointee.mBuffers.mData?.assumingMemoryBound(to: Float.self)
+            else { return noErr }
             track.render(count: Int(frameCount), into: samples)
             return noErr
         }
@@ -207,7 +207,7 @@ final class MetronomePlayer: ObservableObject {
         track = nil
         isPlaying = false
         currentBeat = 0
-        isFlashing = false
+        flashingAccent = nil
     }
 
     func resetRecords() {
@@ -220,7 +220,8 @@ final class MetronomePlayer: ObservableObject {
     private func refresh() {
         guard let head = track?.position else { return }
         if currentBeat != head.beat { currentBeat = head.beat }
-        if isFlashing != head.flashing { isFlashing = head.flashing }
+        let accent = head.flashing ? accentsByClickLevel[head.clickLevel] : nil
+        if flashingAccent != accent { flashingAccent = accent }
         guard recorded.beats != head.beats || recorded.measures != head.measures else { return }
         totalBeats += head.beats - recorded.beats
         totalMeasures += head.measures - recorded.measures
