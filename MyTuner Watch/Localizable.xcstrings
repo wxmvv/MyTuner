@@ -1,0 +1,236 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "%lld BPM": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld BPM"
+          }
+        }
+      }
+    },
+    "%lld cents flat": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "偏低 %lld 音分"
+          }
+        }
+      }
+    },
+    "%lld cents sharp": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "偏高 %lld 音分"
+          }
+        }
+      }
+    },
+    "Adjust BPM with Digital Crown": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "用数码表冠调速"
+          }
+        }
+      }
+    },
+    "Allow microphone": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "允许使用麦克风"
+          }
+        }
+      }
+    },
+    "Allow microphone access in Settings.": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "请在设置中允许访问麦克风。"
+          }
+        }
+      }
+    },
+    "Audio could not start. Connect headphones or turn off wrist-down audio.": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "无法播放。请连接耳机或关闭放腕播放。"
+          }
+        }
+      }
+    },
+    "First-beat haptics": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "首拍振动"
+          }
+        }
+      }
+    },
+    "In tune": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "音准"
+          }
+        }
+      }
+    },
+    "Listen": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "开始拾音"
+          }
+        }
+      }
+    },
+    "Metronome": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "节拍器"
+          }
+        }
+      }
+    },
+    "No microphone input is available. Try again after disconnecting Bluetooth audio.": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "没有可用的麦克风输入。请断开蓝牙音频设备后重试。"
+          }
+        }
+      }
+    },
+    "Play a note": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "请弹奏一个音"
+          }
+        }
+      }
+    },
+    "Start metronome": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "启动节拍器"
+          }
+        }
+      }
+    },
+    "Starting microphone…": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "正在启动麦克风…"
+          }
+        }
+      }
+    },
+    "Stop metronome": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "停止节拍器"
+          }
+        }
+      }
+    },
+    "Tempo": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "速度"
+          }
+        }
+      }
+    },
+    "The Watch simulator did not provide microphone input.": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Watch 模拟器未提供麦克风输入。"
+          }
+        }
+      }
+    },
+    "Time signature": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "拍号"
+          }
+        }
+      }
+    },
+    "Tuner": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "调音器"
+          }
+        }
+      }
+    },
+    "Unable to play the metronome.": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "无法播放节拍器。"
+          }
+        }
+      }
+    },
+    "Unable to start the microphone.": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "无法启动麦克风。"
+          }
+        }
+      }
+    },
+    "Wrist-down audio": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "放腕播放"
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}

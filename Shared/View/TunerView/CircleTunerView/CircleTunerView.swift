@@ -14,9 +14,9 @@ struct CircleTunerView: View {
     @StateObject var instrumentConductor = InstrumentConductor()
     
     @AppStorage("smoothingFactor") private var smoothingFactor: Double = 0.5
-    @AppStorage("inTuneRange") private var inTuneRange: Int = 2
-    @AppStorage("pitchStandard") private var pitchStandard = 440
-    @AppStorage("amplitudeLimit") private var amplitudeLimit: Double = 0.2
+    @AppStorage("inTuneRange") private var inTuneRange: Int = TunerDefaults.inTuneRange
+    @AppStorage("pitchStandard") private var pitchStandard = TunerDefaults.pitchStandard
+    @AppStorage("amplitudeLimit") private var amplitudeLimit: Double = TunerDefaults.amplitudeLimit
     @AppStorage("preferredName") private var preferredName: ModifierPreference = .preferSharps
     @AppStorage("tuningMode") private var tuningMode: TuningMode = .chromatic
     @AppStorage("instrument") private var instrument: Instrument = .Acoustic

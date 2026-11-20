@@ -37,8 +37,6 @@ class TunerConductor: ObservableObject, HasAudioEngine {
     @Published var tuningMode: TuningMode = .chromatic // { didSet {} }
     @Published var instrument: Instrument = .Acoustic
     
-    private let noteNamesWithSharps = ["C", "C♯", "D", "D♯", "E", "F", "F♯", "G", "G♯", "A", "A♯", "B"]
-    private let noteNamesWithFlats = ["C", "D♭", "D", "E♭", "E", "F", "G♭", "G", "A♭", "A", "B♭", "B"]
     let engine = AudioEngine()
     let initialDevice: Device
     let mic: AudioEngine.InputNode
@@ -48,28 +46,8 @@ class TunerConductor: ObservableObject, HasAudioEngine {
     let silence: Fader
     var tracker: PitchTap!
     
-    /// MARK 平滑算法相关
-    // [EMA]
-    @Published var smoothingFactor: Float = 0.5  // [EMA] 调整平滑程度 [0,1] 越大则越平滑，越小则越灵敏
-    private var smoothedPitch: Float = 0.0  // [EMA]
-    // 取前 n 个样本然后取平均值
-    var initialPitches : [Float] = []
-    let initialSamplesToAverage = 5
-    func resetSmoothing() {
-        // 当检测到声音停止或长时间静音时，可能需要重置状态
-        smoothedPitch = 0.0
-        initialPitches.removeAll()
-        print("Smoothing reset.")
-    }
-    // 取中位数
-     var pitchHistory: [Float] = []
-     let medianWindowSize = 5 // 使用最近3个pitch值的中位数
-    // 通过动态调整 smoothFactor 来平滑
-    // let initialSmoothingFactor: Float = 0.7 // 初始阶段，更快响应
-    // let stableSmoothingFactor: Float = 0.95 // 稳定阶段，更强平滑
-    // var sampleCount: Int = 0
-    // let transitionSampleCount: Int = 5 // 多少个样本后切换到稳定平滑因子
-
+    @Published var smoothingFactor: Float = 0.5
+    private var smoothing = TunerSmoothing()
 
     init() {
         guard let input = engine.input else { fatalError() }
@@ -83,7 +61,7 @@ class TunerConductor: ObservableObject, HasAudioEngine {
         silence = Fader(tappableNodeC, gain: 0)
         engine.output = silence
         
-        tracker = PitchTap(mic) { pitch, amp in
+        tracker = PitchTap(mic, bufferSize: UInt32(TunerDefaults.analysisFrames)) { pitch, amp in
             DispatchQueue.main.async {
                 self.update(pitch[0], amp[0])
             }
@@ -104,7 +82,7 @@ class TunerConductor: ObservableObject, HasAudioEngine {
     
     // 转换为midi编号
     func pitchToMidi(_ pitch: Float) -> Float {
-        return 69.0 + 12.0 * log2f(pitch / pitchStandard)
+        ChromaticPitch.midi(frequency: pitch, reference: pitchStandard)
     }
     
     // Instrument模式使用
@@ -139,65 +117,25 @@ class TunerConductor: ObservableObject, HasAudioEngine {
         data.amplitude = amp
         
         
-        if smoothedPitch == 0.0 {
-            // [Initial] 初始平滑
-            if initialPitches.count < initialSamplesToAverage {
-                initialPitches.append(pitch)
-                print("Collecting initial samples: \(initialPitches.count)/\(initialSamplesToAverage)")
-                if initialPitches.count == initialSamplesToAverage {
-                    let sum = initialPitches.reduce(0, +) // 计算初始平均值
-                    smoothedPitch = sum / Float(initialSamplesToAverage)
-                } else {
-                    return
-                }
-                
-            }
-        } else {
-            // 不需要平滑
-            // smoothedPitch = pitch
-            
-            // [EMA] 平滑 https://zh.wikipedia.org/wiki/移動平均#指數移動平均
-            // smoothedPitch = smoothingFactor * smoothedPitch + (1.0 - smoothingFactor) * pitch
-            
-            // 中位数平滑算法
-             pitchHistory.append(pitch)
-             if pitchHistory.count > medianWindowSize {
-                 pitchHistory.removeFirst() // 保持窗口大小
-             }
-             guard pitchHistory.count == medianWindowSize else {
-                 if smoothedPitch == 0.0 { smoothedPitch = pitch }
-                 print("Collecting history for median: \(pitchHistory.count)/\(medianWindowSize)")
-                 return
-             }
-             let sortedPitches = pitchHistory.sorted()
-             smoothedPitch = sortedPitches[medianWindowSize / 2]
-        }
-        
-        
+        guard let smoothedPitch = smoothing.update(pitch) else { return }
+
         // 最终pitch
         data.pitch = smoothedPitch
         
         // 将pitch处理为midi信息
-        let midi = pitchToMidi(smoothedPitch)
-        
         if tuningMode == .chromatic {
-            let nearestMidi = round(midi)
-            let cents = 100.0 * (midi - Float(nearestMidi))
-            let targetNote = Note(midi: Int(nearestMidi),referenceFrequency: pitchStandard)
-            let targetFrequency = pitchStandard * powf(2.0, (Float(nearestMidi) - 69.0) / 12.0)
-            
-            data.cents = cents
-            data.isPitchHigh = cents > 0.0
-            data.targetMidi = Int(nearestMidi)
+            guard let reading = ChromaticPitch(frequency: smoothedPitch, reference: pitchStandard) else { return }
+            let targetNote = reading.note
+            data.cents = reading.cents
+            data.isPitchHigh = reading.cents > 0
+            data.targetMidi = targetNote.midi
             data.targetNote = targetNote
-            data.targetFrequency = targetFrequency
-            data.frequencyDistance = pitch - targetFrequency
-            let noteIndex = Int(nearestMidi) % 12
-            let octave = Int(nearestMidi / 12) - 1
-            data.noteNameWithSharps = "\(noteNamesWithSharps[noteIndex])\(octave)"
-            data.noteNameWithFlats = "\(noteNamesWithFlats[noteIndex])\(octave)"
-            
+            data.targetFrequency = targetNote.frequency
+            data.frequencyDistance = pitch - targetNote.frequency
+            data.noteNameWithSharps = "\(targetNote.noteName.noteNameWithSharps)\(targetNote.octave)"
+            data.noteNameWithFlats = "\(targetNote.noteName.noteNameWithFlats)\(targetNote.octave)"
         } else if tuningMode == .instrument {
+            let midi = pitchToMidi(smoothedPitch)
             let nearestMidi = findNearestMidi(midi: midi, from: instrument.midis())
             let cents = 100.0 * (midi - Float(nearestMidi!))
             let targetNote = Note(midi: nearestMidi!,referenceFrequency: pitchStandard)

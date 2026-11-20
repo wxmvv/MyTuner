@@ -24,7 +24,22 @@
 		C4E24ACD2D914CD600E260C1 /* AudioKitEX in Frameworks */ = {isa = PBXBuildFile; productRef = C4E24ACC2D914CD600E260C1 /* AudioKitEX */; };
 		C4E24AD02D914D0400E260C1 /* AudioKitUI in Frameworks */ = {isa = PBXBuildFile; productRef = C4E24ACF2D914D0400E260C1 /* AudioKitUI */; };
 		C4E24AD32D914D1100E260C1 /* SoundpipeAudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = C4E24AD22D914D1100E260C1 /* SoundpipeAudioKit */; };
+		C4F1B9000000000000000001 /* MyTuner Watch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = C4F1B9000000000000000002 /* MyTuner Watch.app */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		C4F1B9000000000000000003 /* Shared/Model/MetronomeSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F1B9000000000000000004 /* Shared/Model/MetronomeSettings.swift */; };
+		C4F1B9000000000000000005 /* Shared/ViewModel/MetronomePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F1B9000000000000000006 /* Shared/ViewModel/MetronomePlayer.swift */; };
+		C4F1B9000000000000000007 /* Shared/Model/Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F1B9000000000000000008 /* Shared/Model/Note.swift */; };
+		C4F1B9000000000000000015 /* Shared/Model/TunerAnalysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F1B9000000000000000016 /* Shared/Model/TunerAnalysis.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C4F1B9000000000000000009 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C4E24A692D914AAE00E260C1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C4F1B900000000000000000A;
+			remoteInfo = "MyTuner Watch";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		C4868DAB2DDBFAEF007902DC /* Embed Watch Content */ = {
@@ -33,6 +48,7 @@
 			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
 			dstSubfolderSpec = 16;
 			files = (
+				C4F1B9000000000000000001 /* MyTuner Watch.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -46,6 +62,11 @@
 		C458CB6C2DDB0F8D002F0121 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		C48407602DA8DF05009EBF2B /* Images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Images; sourceTree = "<group>"; };
 		C4E24A712D914AAE00E260C1 /* MyTuner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyTuner.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C4F1B9000000000000000002 /* MyTuner Watch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MyTuner Watch.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C4F1B9000000000000000004 /* Shared/Model/MetronomeSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shared/Model/MetronomeSettings.swift; sourceTree = SOURCE_ROOT; };
+		C4F1B9000000000000000006 /* Shared/ViewModel/MetronomePlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shared/ViewModel/MetronomePlayer.swift; sourceTree = SOURCE_ROOT; };
+		C4F1B9000000000000000008 /* Shared/Model/Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shared/Model/Note.swift; sourceTree = SOURCE_ROOT; };
+		C4F1B9000000000000000016 /* Shared/Model/TunerAnalysis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shared/Model/TunerAnalysis.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -64,6 +85,7 @@
 				Model/ModifierPreference.swift,
 				Model/Note.swift,
 				Model/ResponseSpeed.swift,
+				Model/TunerAnalysis.swift,
 				Model/TuningMode.swift,
 				View/Components/AudioKitView.swift,
 				View/Components/MatchedNote.swift,
@@ -100,6 +122,7 @@
 				Model/ModifierPreference.swift,
 				Model/Note.swift,
 				Model/ResponseSpeed.swift,
+				Model/TunerAnalysis.swift,
 				Model/TuningMode.swift,
 				View/Components/AmplitudeLimitPicker.swift,
 				View/Components/AudioKitView.swift,
@@ -175,6 +198,13 @@
 			);
 			target = C42F59E72DA14346000F56D5 /* MyTuner Dev */;
 		};
+		C4F1B900000000000000000B /* Exceptions for "MyTuner Watch" folder in "MyTuner Watch" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = C4F1B900000000000000000A /* MyTuner Watch */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -215,6 +245,14 @@
 			path = MyTuner;
 			sourceTree = "<group>";
 		};
+		C4F1B900000000000000000C /* MyTuner Watch */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				C4F1B900000000000000000B /* Exceptions for "MyTuner Watch" folder in "MyTuner Watch" target */,
+			);
+			path = "MyTuner Watch";
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -242,6 +280,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C4F1B900000000000000000D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -261,6 +306,8 @@
 				C42F5A172DA1513F000F56D5 /* Shared */,
 				C4E24A732D914AAE00E260C1 /* MyTuner */,
 				C42F5A142DA14410000F56D5 /* MyTuner Dev */,
+				C4F1B900000000000000000C /* MyTuner Watch */,
+				C4F1B900000000000000000E /* Watch Shared Sources */,
 				C47B3D412DA616DA00A624EB /* Frameworks */,
 				C4E24A722D914AAE00E260C1 /* Products */,
 				C458CB692DDB0F7F002F0121 /* README.md */,
@@ -273,8 +320,20 @@
 			children = (
 				C4E24A712D914AAE00E260C1 /* MyTuner.app */,
 				C42F59FA2DA14346000F56D5 /* MyTuner Dev.app */,
+				C4F1B9000000000000000002 /* MyTuner Watch.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		C4F1B900000000000000000E /* Watch Shared Sources */ = {
+			isa = PBXGroup;
+			children = (
+				C4F1B9000000000000000004 /* Shared/Model/MetronomeSettings.swift */,
+				C4F1B9000000000000000006 /* Shared/ViewModel/MetronomePlayer.swift */,
+				C4F1B9000000000000000016 /* Shared/Model/TunerAnalysis.swift */,
+				C4F1B9000000000000000008 /* Shared/Model/Note.swift */,
+			);
+			name = "Watch Shared Sources";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -319,6 +378,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				C4F1B900000000000000000F /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				C4E24A732D914AAE00E260C1 /* MyTuner */,
@@ -333,6 +393,28 @@
 			);
 			productName = MyTuner;
 			productReference = C4E24A712D914AAE00E260C1 /* MyTuner.app */;
+			productType = "com.apple.product-type.application";
+		};
+		C4F1B900000000000000000A /* MyTuner Watch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C4F1B9000000000000000010 /* Build configuration list for PBXNativeTarget "MyTuner Watch" */;
+			buildPhases = (
+				C4F1B9000000000000000011 /* Sources */,
+				C4F1B900000000000000000D /* Frameworks */,
+				C4F1B9000000000000000012 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				C4F1B900000000000000000C /* MyTuner Watch */,
+			);
+			name = "MyTuner Watch";
+			packageProductDependencies = (
+			);
+			productName = "MyTuner Watch";
+			productReference = C4F1B9000000000000000002 /* MyTuner Watch.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -373,6 +455,7 @@
 			projectRoot = "";
 			targets = (
 				C4E24A702D914AAE00E260C1 /* MyTuner */,
+				C4F1B900000000000000000A /* MyTuner Watch */,
 				C42F59E72DA14346000F56D5 /* MyTuner Dev */,
 			);
 		};
@@ -400,6 +483,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C4F1B9000000000000000012 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -417,7 +507,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C4F1B9000000000000000011 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C4F1B9000000000000000003 /* Shared/Model/MetronomeSettings.swift in Sources */,
+				C4F1B9000000000000000005 /* Shared/ViewModel/MetronomePlayer.swift in Sources */,
+				C4F1B9000000000000000015 /* Shared/Model/TunerAnalysis.swift in Sources */,
+				C4F1B9000000000000000007 /* Shared/Model/Note.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C4F1B900000000000000000F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			platformFilter = ios;
+			target = C4F1B900000000000000000A /* MyTuner Watch */;
+			targetProxy = C4F1B9000000000000000009 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		C42F59F82DA14346000F56D5 /* Debug */ = {
@@ -691,6 +801,62 @@
 			};
 			name = Release;
 		};
+		C4F1B9000000000000000013 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "MyTuner Watch/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = MyTuner;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Use the microphone to detect pitch and help tune your instrument.";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = cc.wxmvv.MyTuner.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "watchos watchsimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "MyTuner Watch/PitchTracking/WatchPitchTracker.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 11.0;
+			};
+			name = Debug;
+		};
+		C4F1B9000000000000000014 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "MyTuner Watch/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = MyTuner;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Use the microphone to detect pitch and help tune your instrument.";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = cc.wxmvv.MyTuner.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "watchos watchsimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "MyTuner Watch/PitchTracking/WatchPitchTracker.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 11.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -717,6 +883,15 @@
 			buildConfigurations = (
 				C4E24A802D914AAE00E260C1 /* Debug */,
 				C4E24A812D914AAE00E260C1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C4F1B9000000000000000010 /* Build configuration list for PBXNativeTarget "MyTuner Watch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C4F1B9000000000000000013 /* Debug */,
+				C4F1B9000000000000000014 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

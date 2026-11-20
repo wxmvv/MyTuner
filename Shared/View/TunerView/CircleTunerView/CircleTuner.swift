@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CircleTuner: View {
     var tunerData: TunerData
-    @AppStorage("inTuneRange") private var inTuneRange: Int = 2
+    @AppStorage("inTuneRange") private var inTuneRange: Int = TunerDefaults.inTuneRange
     
     var body: some View {
         GeometryReader { geo in
