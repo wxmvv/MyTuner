@@ -65,12 +65,18 @@ struct MetronomeView: View {
             }
         }
         .background {
+            let flashColor = self.flashColor
+            let canAnimateFlash = !reduceMotion && metronome.isPlaying && screenFlashMode != .off
+            let flashAnimation = Animation.easeOut(duration: flashColor == nil ? 0.11 : 0.04)
             ZStack {
                 Color(uiColor: .systemBackground)
                 if let flashColor {
                     flashColor.opacity(colorScheme == .dark ? 0.42 : 0.50)
+                        .transition(.opacity)
+                        .zIndex(1)
                 }
             }
+            .animation(canAnimateFlash ? flashAnimation : nil, value: flashColor)
             .ignoresSafeArea()
         }
         .navigationBarTitleDisplayMode(.inline)
